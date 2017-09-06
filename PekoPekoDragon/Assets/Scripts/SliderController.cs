@@ -8,29 +8,80 @@ public class SliderController : MonoBehaviour
     public Slider mood;
     public Slider love1;
     public Slider love2;
+    public Slider love3;
+    public Slider love4;
+    int frameCount;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
-        mood = GetComponent<Slider>();
-        love1 = GetComponent<Slider>();
-        love2 = GetComponent<Slider>();
+        mood.value = 2;
+        love1.value = 0;
+        love2.value = 0;
+        love3.value = 0;
+        love4.value = 0;
+        frameCount = 0;
     }
 
     // Update is called once per frame
     void Update ()
     {
+        // プレイヤー１のゲージを増やす
 		if(Input.GetKeyDown(KeyCode.Z))
         {
-            mood.value += 2;
-            love1.value += 2;
-            love2.value = love2.value < 2 ? 0 : love2.value - 2;
+            ModifySlider(mood, 2, true);
+            ModifySlider(love1, 2, true);
+            ModifySlider(love2, 1, false);
+            ModifySlider(love3, 1, false);
+            ModifySlider(love4, 1, false);
         }
-        if (Input.GetKeyDown(KeyCode.M))
+        // プレイヤー２のゲージを増やす
+        if (Input.GetKeyDown(KeyCode.X))
         {
-            mood.value += 2;
-            love1.value = love1.value < 2 ? 0 : love1.value - 2;
-            love2.value += 2;
+            ModifySlider(mood, 2, true);
+            ModifySlider(love1, 1, false);
+            ModifySlider(love2, 2, true);
+            ModifySlider(love3, 1, false);
+            ModifySlider(love4, 1, false);
+        }
+        // プレイヤー３のゲージを増やす
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ModifySlider(mood, 2, true);
+            ModifySlider(love1, 1, false);
+            ModifySlider(love2, 1, false);
+            ModifySlider(love3, 2, true);
+            ModifySlider(love4, 1, false);
+        }
+        // プレイヤー４のゲージを増やす
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            ModifySlider(mood, 2, true);
+            ModifySlider(love1, 1, false);
+            ModifySlider(love2, 1, false);
+            ModifySlider(love3, 1, false);
+            ModifySlider(love4, 2, true);
+        }
+
+        // 自然と減らしていく
+        frameCount++;
+        if(frameCount > 20)
+        {
+            ModifySlider(mood, 0.008f, false);
+        }
+    }
+
+    private void ModifySlider(Slider slider, float value, bool isAdd)
+    {
+        // ゲージを増やす
+        if(isAdd)
+        {
+            slider.value += value;
+        }
+        // ゲージを減らす
+        else
+        {
+            slider.value = slider.value < value ? 0 : slider.value - value;
         }
     }
 }
