@@ -6,13 +6,12 @@ using UnityEngine.UI;
 public class TimerController : MonoBehaviour
 {
     Text timer;
-    float time;
+    public float time = 180.0f;
 
 	// Use this for initialization
 	void Start ()
     {
         timer = GetComponent<Text>();
-        time = 180.0f;
         timer.text = "00:00";
 	}
 	
@@ -20,7 +19,8 @@ public class TimerController : MonoBehaviour
 	void Update ()
     {
         time -= Time.deltaTime;
-
+        time = time < 0 ? time = 0 : time;
+        
         if(time / 60 < 10)
         {
             timer.text = "0" + ((int)(time) / 60).ToString();
@@ -38,7 +38,5 @@ public class TimerController : MonoBehaviour
         {
             timer.text += ((int)(time) % 60).ToString();
         }
-
-        //timer.text = ((int)(time) / 60).ToString() + ":" + ((int)(time) % 60).ToString();
 	}
 }

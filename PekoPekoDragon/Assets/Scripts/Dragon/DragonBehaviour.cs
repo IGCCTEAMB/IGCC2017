@@ -11,22 +11,24 @@ public class DragonBehaviour : MonoBehaviour {
     private int num;
     [SerializeField]
     private float minDist;
-    //[SerializeField]
-    //private float speed;
+
+    [SerializeField]
+    private GameObject _targetObject;
 
     private NavMeshAgent navMeshAgent;
 
 	// Use this for initialization
 	void Start () {
         navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
+       
         float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
-		
-        if(dist > minDist)
+        _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
+
+        if (dist > minDist)
         {
             Move();
         }
@@ -38,6 +40,12 @@ public class DragonBehaviour : MonoBehaviour {
 
     void Move()
     {
-        navMeshAgent.SetDestination(waypoints[num].transform.position);
+        if(!_targetObject)
+        {
+            navMeshAgent.SetDestination(waypoints[num].transform.position);
+        }else{
+            navMeshAgent.SetDestination(_targetObject.transform.position);
+        }
+
     }
 }
