@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
+- path: Assets/Scenes/Satou.unity
+=======
 - path: Assets/Scenes/Irfan.unity
+>>>>>>> 094c1ed5577e904ca094a1384581c980be27fa6a
   isLoaded: 1
   isActive: 1

@@ -1,0 +1,98 @@
+暫定版　Preliminary version
+
+ドラゴンの仕様 Dragon specification
+
+  ●ドラゴンの機嫌 mood
+
+    ・ドラゴンがプレイヤーに従うかどうかの値
+      Value for the dragon to follow the player
+
+    ・食べ物をやると増える
+      Giving food increases
+
+    ・時間経過とダメージで減る
+      Decrease over time and damage
+
+    ・一定値以上でプレイヤーに従う
+      Follow the player above a certain value
+
+    ・一定値未満で暴れる
+      Rampage below a certain value
+
+    ・暴れてしばらくすると元に戻る
+      Calm down after the rampage
+
+  ●ドラゴンのなつき度 love
+
+    ・食べ物をやると増える
+      Giving food increases
+
+    ・ドラゴンを攻撃すると減る
+      Decreasing when attacking a dragon
+
+    ・ドラゴンを連れているときにドラゴンがダメージを受けると減る
+      Reduce when a dragon gets damaged while taking a dragon
+
+  ●ドラゴンを連れているメリット dragon merit
+
+    ・ドラゴンがバリアを張るので通常攻撃を無効にする
+      Since the dragon creates a barrier, it disables the physical attack
+
+
+
+
+
+
+プレイヤーの仕様 Player specification
+
+  ●移動 move
+
+    ・移動できる。触れることでアイテムを拾う
+      You can move. Picking up items by touching
+
+  ●投げる throw
+
+    ・アイテムを投げる
+      throw item
+
+  ●攻撃 attack
+
+    ・物理攻撃を行う
+      physical attack
+
+
+アイテムの仕様 Item specification
+
+  ●食べ物 food
+
+    ・ドラゴンに与えるとなつき度とご機嫌度が上昇する
+      If give to Dragon,increaces mood and love
+
+  ●魔法 magic
+
+    ・魔法で攻撃する
+      Attack with magic
+
+    ・魔法はバリアを貫通する
+      Magic penetrates the barrier
+
+勝利条件 Victory condition
+
+  ●基本 basic Victory condition
+
+    ・ドラゴンを陣地に連れていく
+       Lure the dragon to the objective
+
+  ●時間が切れたとき If time over
+
+    ・時間が切れたときになつき度が最も高いプレイヤーの勝利
+      Victory for the player who has the highest love when time runs out
+
+ドラゴンがついてくる条件
+
+  ●なつき度が最も大きいプレイヤーに従う Follow the player with the largest love
+    ・5秒に1回、従う相手を変える
+      once every 5 seconds, change the opponent
+
+メモ
+ドラゴンを連れたプレイヤーが死ぬとなつき度は半分に、ご機嫌度はニュートラルに。床にアイテムを落とす

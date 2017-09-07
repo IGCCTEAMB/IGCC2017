@@ -14,10 +14,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
         // コンポーネントの取得
         controller = GetComponent<CharacterController>();
-
     }
 
     void Update()
