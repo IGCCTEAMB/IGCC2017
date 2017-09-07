@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Play.unity
+=======
+- path: Assets/Scenes/Masayuki.unity
+>>>>>>> 077f6f962f56178550ead5801753cc57f1183a51
   isLoaded: 1
   isActive: 1

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     const int PLAYER_NUM = 4;
+    public float CAMERA_DISTANCE = -6.0f;
 
     GameObject[] player;
     Transform[] target;
@@ -12,7 +13,9 @@ public class CameraController : MonoBehaviour
     Vector3 offset;
     float screenAspect;
     Camera camera;
-    public float speed = 0.0f;
+    public float scale = 1.5f;
+    public float min = 5.0f;
+    public float max = 13.0f;
 
     // Use this for initialization
     void Start ()
@@ -23,7 +26,7 @@ public class CameraController : MonoBehaviour
         {
             // プレイヤーを読み込む
             string name = "Player" + (i + 1).ToString();
-            player[i] = GameObject.Find(name);
+            player[i] = GameObject.FindWithTag(name);
         }
         target = new Transform[2];
         screenAspect = (float)Screen.height / Screen.width;
@@ -63,12 +66,13 @@ public class CameraController : MonoBehaviour
         }
 
         // maxDistanceによってズームの大きさを変える
-        maxDistance = Mathf.Clamp(maxDistance, 5.0f, 9.0f);
+        maxDistance = Mathf.Clamp(maxDistance, min, max);
 
         // 2点間の中心点からカメラの位置を更新
         Vector3 center = Vector3.Lerp(target[0].position, target[1].position, 0.5f);
-        center.y = maxDistance * 1.5f;
-        transform.position = center + Vector3.forward * -6.0f;
+        Vector3 nowPos = (center - gameObject.transform.position) * 0.01f;
+        nowPos.y = maxDistance * scale;
+        transform.position = nowPos + new Vector3(0.0f, 0.0f, CAMERA_DISTANCE);
     }
 
     void UpdateOrthographicSize()
