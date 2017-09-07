@@ -38,6 +38,7 @@ public class DragonBehaviour : MonoBehaviour {
         }
 	}
 
+
     void Move()
     {
         if(!_targetObject)
