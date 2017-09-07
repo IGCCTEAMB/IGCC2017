@@ -11,8 +11,8 @@ public class DragonBehaviour : MonoBehaviour {
     private int num;
     [SerializeField]
     private float minDist;
-    [SerializeField]
-    private float speed;
+    //[SerializeField]
+    //private float speed;
 
     private NavMeshAgent navMeshAgent;
 
@@ -38,8 +38,6 @@ public class DragonBehaviour : MonoBehaviour {
 
     void Move()
     {
-        //gameObject.transform.LookAt(waypoints[num].transform.position);
-        //gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
         navMeshAgent.SetDestination(waypoints[num].transform.position);
     }
 }
