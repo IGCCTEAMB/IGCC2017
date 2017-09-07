@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour
         {
             // プレイヤーを読み込む
             string name = "Player" + (i + 1).ToString();
-            player[i] = GameObject.FindWithTag(name);
+            player[i] = GameObject.Find(name);
         }
         target = new Transform[2];
         screenAspect = (float)Screen.height / Screen.width;
