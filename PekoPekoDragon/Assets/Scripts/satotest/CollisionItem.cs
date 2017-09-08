@@ -2,24 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemScript : MonoBehaviour {
+public class CollisionItem : MonoBehaviour {
 
-    [SerializeField]
-    private float destroyIn;
-
-	// Use this for initialization
-	void Start () {
-
+    private void Start()
+    {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
-        Physics.IgnoreCollision(go.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
-        Destroy(gameObject, destroyIn);
-  }
-
-    // Update is called once per frame
-    void Update () {
-
-        transform.Rotate(new Vector3(15, 30, 45) * Time.deltaTime);
-
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), go.GetComponent<CharacterController>());
     }
 
     //接触時に呼ばれるコールバック
@@ -45,5 +33,4 @@ public class ItemScript : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-
 }

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FoodThrow : MonoBehaviour {
-
-    // food prefab
-    public GameObject food;
+public class Attack : MonoBehaviour
+{
 
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
@@ -14,20 +12,20 @@ public class FoodThrow : MonoBehaviour {
     //トリガー処理
     bool trigger = true;
 
-    //フード所持
-    public bool foodhave = false;
+    // attack prefab
+    public GameObject attack;
 
     // 発射点
     public Transform muzzle;
 
     // 射出速度
-    public float speed = 500;
+    public float speed = 1000;
 
     // Use this for initialization
     void Start()
     {
-       //コントローラ設定
-       playerNo =GamepadInput.GamePad.Index.One;
+        //コントローラ設定
+        playerNo = GamepadInput.GamePad.Index.One;
     }
 
     // Update is called once per frame
@@ -40,27 +38,26 @@ public class FoodThrow : MonoBehaviour {
 
         //キーが押された時
         //if (Input.GetKeyDown(KeyCode.Z))
-        if (keyState.A && trigger == false && foodhave == true)
+        if (keyState.X && trigger == false)
         {
             trigger = true;
-            foodhave = false;
 
-            // 食べ物の複製
-            GameObject foods = GameObject.Instantiate(food) as GameObject;
+            // 弾の複製
+            GameObject attacks = GameObject.Instantiate(attack) as GameObject;
 
-            Physics.IgnoreCollision(foods.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
-            Physics.IgnoreCollision(foods.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
+            Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
+            Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
 
             Vector3 force;
             force = this.gameObject.transform.forward * speed;
             // Rigidbodyに力を加えて発射
-            foods.GetComponent<Rigidbody>().AddForce(force);
+            attacks.GetComponent<Rigidbody>().AddForce(force);
             // 位置を調整
-            foods.transform.position = muzzle.position;
+            attacks.transform.position = muzzle.position;
             // 向きを調整
-            foods.transform.rotation = muzzle.rotation;
+            attacks.transform.rotation = muzzle.rotation;
         }
-        else if (!keyState.A && trigger == true)
+        else if (!keyState.X && trigger == true)
         {
             trigger = false;
         }
