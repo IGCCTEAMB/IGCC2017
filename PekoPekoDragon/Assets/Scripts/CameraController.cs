@@ -8,9 +8,13 @@ public class CameraController : MonoBehaviour
     public float CAMERA_DISTANCE = -6.0f;
 
     GameObject[] player;
-    Transform[] target;
+    // 最小と最大の座標の位置に空のオブジェクトを生成するための変数
+    GameObject emptyObject1;
+    GameObject emptyObject2;
+    // 最小値の座標、最大値の座標を格納する
+    Transform[] targets;
     [SerializeField]
-    Vector3 offset;
+    Vector3 offset = new Vector3(0, 0, 2);
     float screenAspect;
     Camera camera;
     public float scale = 1.5f;
@@ -28,7 +32,11 @@ public class CameraController : MonoBehaviour
             string name = "Player" + (i + 1).ToString();
             player[i] = GameObject.Find(name);
         }
-        target = new Transform[2];
+        emptyObject1 = new GameObject("Min GameObject");
+        emptyObject2 = new GameObject("Max GameObject");
+        targets = new Transform[2];
+        targets[0] = emptyObject1.transform;
+        targets[1] = emptyObject2.transform;
         screenAspect = (float)Screen.height / Screen.width;
         camera = GetComponent<Camera>();
     }
@@ -42,43 +50,56 @@ public class CameraController : MonoBehaviour
 
     void UpdateCameraPosition()
     {
-        float maxDistance = 0.0f;
+        // 初期化
+        emptyObject1.transform.position = Vector3.zero;
+        emptyObject2.transform.position = Vector3.zero;
+        targets[0] = emptyObject1.transform;
+        targets[1] = emptyObject2.transform;
 
-        int i = 0;
-        int j = 1;
+        int i;
+        int j;
         for (i = 0; i < PLAYER_NUM - 1; i++)
         {
             for (j = i + 1; j < PLAYER_NUM; j++)
             {
-                // ２点間の距離の絶対値を求める
-                float distance = Vector3.Distance(player[i].transform.position, player[j].transform.position);
-                distance = Mathf.Abs(distance);
-
-                // 一番遠い距離を求める
-                if (distance > maxDistance)
-                {
-                    maxDistance = distance;
-
-                    target[0] = player[i].transform;
-                    target[1] = player[j].transform;
-                }
+                // XとZの最小値、最大値を求める
+                CalcMinAndMax(player[i].transform, player[j].transform);
             }
         }
 
-        // maxDistanceによってズームの大きさを変える
-        maxDistance = Mathf.Clamp(maxDistance, min, max);
+        emptyObject1.transform.position = targets[0].transform.position;
+        emptyObject2.transform.position = targets[1].transform.position;
 
         // 2点間の中心点からカメラの位置を更新
-        Vector3 center = Vector3.Lerp(target[0].position, target[1].position, 0.5f);
-        Vector3 nowPos = (center - gameObject.transform.position) * 0.01f;
-        nowPos.y = maxDistance * scale;
-        transform.position = nowPos + new Vector3(0.0f, 0.0f, CAMERA_DISTANCE);
+        Vector3 center = Vector3.Lerp(targets[0].position, targets[1].position, 0.5f);
+        transform.position = center + new Vector3(0.0f, 10.0f, CAMERA_DISTANCE);
+    }
+    
+    void CalcMinAndMax(Transform target1, Transform target2)
+    {
+        Vector3 minPos = targets[0].position;
+        // X座標の最小値を求める
+        minPos.x = Mathf.Min(minPos.x, target1.position.x);
+        minPos.x = Mathf.Min(minPos.x, target2.position.x);
+        // Z座標の最小値を求める
+        minPos.z = Mathf.Min(minPos.z, target1.position.z);
+        minPos.z = Mathf.Min(minPos.z, target2.position.z);
+        targets[0].position = minPos;
+
+        Vector3 maxPos = targets[1].position;
+        // X座標の最大値を求める
+        maxPos.x = Mathf.Max(maxPos.x, target1.position.x);
+        maxPos.x = Mathf.Max(maxPos.x, target2.position.x);
+        // Z座標の最大値を求める
+        maxPos.z = Mathf.Max(maxPos.z, target1.position.z);
+        maxPos.z = Mathf.Max(maxPos.z, target2.position.z);
+        targets[1].position = maxPos;
     }
 
     void UpdateOrthographicSize()
     {
         // ２点間のベクトルを取得
-        Vector3 targetsVector = AbsPositionDiff(target[0], target[1]) + (Vector3)offset;
+        Vector3 targetsVector = AbsPositionDiff(targets[0], targets[1]) + offset;
 
         // アスペクト比が縦長ならzの半分、横長ならxとアスペクト比でカメラのサイズを更新
         float targetsAspect = targetsVector.z / targetsVector.x;
@@ -91,6 +112,7 @@ public class CameraController : MonoBehaviour
         {
             targetOrthographicSize = targetsVector.x * (1 / camera.aspect) * 0.5f;
         }
+        // Clampでズーム範囲を制御
         camera.orthographicSize = targetOrthographicSize;
     }
 
