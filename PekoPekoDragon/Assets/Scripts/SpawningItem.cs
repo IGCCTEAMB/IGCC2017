@@ -22,10 +22,10 @@ public class SpawningItem : MonoBehaviour {
         switch(itemNum)
         {
             case 0:
-                Instantiate(itemPrefabs[0], new Vector3(gameObject.transform.position.x, 5, gameObject.transform.position.z), Quaternion.identity);
+                Instantiate(itemPrefabs[0], new Vector3(gameObject.transform.position.x, 6, gameObject.transform.position.z), Quaternion.identity);
                 break;
             case 1:
-                Instantiate(itemPrefabs[1], new Vector3(gameObject.transform.position.x, 5, gameObject.transform.position.z), Quaternion.identity);
+                Instantiate(itemPrefabs[1], new Vector3(gameObject.transform.position.x, 6, gameObject.transform.position.z), Quaternion.identity);
                 break;
         }
     }
