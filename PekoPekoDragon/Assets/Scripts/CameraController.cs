@@ -17,9 +17,6 @@ public class CameraController : MonoBehaviour
     Vector3 offset = new Vector3(0, 0, 2);
     float screenAspect;
     Camera camera;
-    public float scale = 1.5f;
-    public float min = 5.0f;
-    public float max = 13.0f;
 
     // Use this for initialization
     void Start ()
@@ -112,7 +109,6 @@ public class CameraController : MonoBehaviour
         {
             targetOrthographicSize = targetsVector.x * (1 / camera.aspect) * 0.5f;
         }
-        // Clampでズーム範囲を制御
         camera.orthographicSize = targetOrthographicSize;
     }
 
