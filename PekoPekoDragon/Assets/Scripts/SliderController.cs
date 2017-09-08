@@ -30,37 +30,37 @@ public class SliderController : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Z))
         {
             ModifySlider(mood, 2, true);
-            ModifySlider(love1, 2, true);
-            ModifySlider(love2, 1, false);
-            ModifySlider(love3, 1, false);
-            ModifySlider(love4, 1, false);
+            ModifySlider(love1, 10, true);
+            ModifySlider(love2, 2, false);
+            ModifySlider(love3, 2, false);
+            ModifySlider(love4, 2, false);
         }
         // プレイヤー２のゲージを増やす
         if (Input.GetKeyDown(KeyCode.X))
         {
             ModifySlider(mood, 2, true);
-            ModifySlider(love1, 1, false);
-            ModifySlider(love2, 2, true);
-            ModifySlider(love3, 1, false);
-            ModifySlider(love4, 1, false);
+            ModifySlider(love1, 2, false);
+            ModifySlider(love2, 10, true);
+            ModifySlider(love3, 2, false);
+            ModifySlider(love4, 2, false);
         }
         // プレイヤー３のゲージを増やす
         if (Input.GetKeyDown(KeyCode.C))
         {
             ModifySlider(mood, 2, true);
-            ModifySlider(love1, 1, false);
-            ModifySlider(love2, 1, false);
-            ModifySlider(love3, 2, true);
-            ModifySlider(love4, 1, false);
+            ModifySlider(love1, 2, false);
+            ModifySlider(love2, 2, false);
+            ModifySlider(love3, 10, true);
+            ModifySlider(love4, 2, false);
         }
         // プレイヤー４のゲージを増やす
         if (Input.GetKeyDown(KeyCode.V))
         {
             ModifySlider(mood, 2, true);
-            ModifySlider(love1, 1, false);
-            ModifySlider(love2, 1, false);
-            ModifySlider(love3, 1, false);
-            ModifySlider(love4, 2, true);
+            ModifySlider(love1, 2, false);
+            ModifySlider(love2, 2, false);
+            ModifySlider(love3, 2, false);
+            ModifySlider(love4, 10, true);
         }
 
         // 自然と減らしていく
