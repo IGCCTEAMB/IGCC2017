@@ -11,6 +11,10 @@ public class DragonBehaviour : MonoBehaviour {
     private int num;
     [SerializeField]
     private float minDist;
+    [SerializeField]
+    private float _minDistWithPlayer = 5;
+    [SerializeField]
+    private GameObject[] dragonAttacks;
 
     [SerializeField]
     private GameObject _targetObject;
@@ -45,7 +49,23 @@ public class DragonBehaviour : MonoBehaviour {
         {
             navMeshAgent.SetDestination(waypoints[num].transform.position);
         }else{
-            navMeshAgent.SetDestination(_targetObject.transform.position);
+
+            float dist = Vector3.Distance(gameObject.transform.position, _targetObject.transform.position);
+
+            if (dist < _minDistWithPlayer)
+            {
+                navMeshAgent.isStopped = true;
+                GameObject par = Instantiate(dragonAttacks[Random.Range(0, dragonAttacks.Length)],gameObject.transform.GetChild(1).transform.position,gameObject.transform.GetChild(1).transform.rotation);
+                gameObject.transform.LookAt(_targetObject.transform.position);
+                
+            }
+            else
+            {
+               navMeshAgent.isStopped = false;
+
+               navMeshAgent.SetDestination(_targetObject.transform.position);
+            }
+
         }
 
     }
