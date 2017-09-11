@@ -10,8 +10,8 @@ public class ItemScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        GameObject go = GameObject.FindGameObjectWithTag("Player");
-        Physics.IgnoreCollision(go.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
+        //GameObject go = GameObject.FindGameObjectWithTag("Player");
+        //Physics.IgnoreCollision(go.GetComponent<CharacterController>(), gameObject.GetComponent<Collider>());
         Destroy(gameObject, destroyIn);
   }
 
@@ -25,6 +25,7 @@ public class ItemScript : MonoBehaviour {
     //接触時に呼ばれるコールバック
     void OnCollisionEnter(Collision hit)
     {
+
         //接触対象はPlayerタグですか？
         if (hit.gameObject.tag == "Player")
         {
@@ -43,6 +44,10 @@ public class ItemScript : MonoBehaviour {
 
             // このコンポーネントを持つGameObjectを破棄する
             Destroy(this.gameObject);
+        }
+        else
+        {
+            Physics.IgnoreCollision(hit.gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
         }
     }
 
