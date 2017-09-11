@@ -19,11 +19,15 @@ public class DragonBehaviour : MonoBehaviour
 
     [SerializeField]
     private GameObject _targetObject;
+    [SerializeField]
+    private AudioClip[] _fireSounds;
 
     private NavMeshAgent navMeshAgent;
 
     private float time;
     public float attackDelay = 2;
+
+
 
     // ご機嫌度
     int moodValue;
@@ -99,7 +103,7 @@ public class DragonBehaviour : MonoBehaviour
         {
             time = 0;
             GameObject par = Instantiate(dragonAttacks[attackNum], gameObject.transform.GetChild(attackNum + 1).transform.position, gameObject.transform.GetChild(attackNum + 1).transform.rotation);
-            
+            SoundManager.instance.PlaySFX(_fireSounds[attackNum]);
         }
     }
 
