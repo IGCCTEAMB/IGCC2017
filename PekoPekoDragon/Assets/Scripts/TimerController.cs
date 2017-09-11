@@ -12,17 +12,29 @@ public class TimerController : MonoBehaviour
     void Start()
     {
         timer = GetComponent<Text>();
-        timer.text = "00:00";
+        DrawTimer();
 
+        // カウントダウンを開始する
         GameManager.Instance.SetCurrentState(GameState.Prepare);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // プレイ中じゃなければ処理しない
+        if (GameManager.Instance.GetGameState() != GameState.Playing)
+            return;
+
+        // 値がマイナスにならないようにする
         time -= Time.deltaTime;
         time = time < 0 ? time = 0 : time;
 
+        DrawTimer();
+    }
+
+    void DrawTimer()
+    {
+        // 時間表示
         if (time / 60 < 10)
         {
             timer.text = "0" + ((int)(time) / 60).ToString();
@@ -31,7 +43,7 @@ public class TimerController : MonoBehaviour
         {
             timer.text = ((int)(time) / 60).ToString();
         }
-        timer.text += ":";
+        timer.text += " : ";
         if (time % 60 < 10)
         {
             timer.text += "0" + ((int)(time) % 60).ToString();

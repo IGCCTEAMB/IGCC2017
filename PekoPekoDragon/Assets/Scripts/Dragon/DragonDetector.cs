@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonDetector : MonoBehaviour {
+public class DragonDetector : MonoBehaviour
+{
 
     private bool _badMood;
 
@@ -35,14 +36,19 @@ public class DragonDetector : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         targetObject = null;
         _badMood = true;
 
     }
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+    {
+		if(!_badMood)
+        {
+
+        }
 	}
 }
