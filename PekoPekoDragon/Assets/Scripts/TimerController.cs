@@ -43,7 +43,7 @@ public class TimerController : MonoBehaviour
         {
             timer.text = ((int)(time) / 60).ToString();
         }
-        timer.text += ":";
+        timer.text += " : ";
         if (time % 60 < 10)
         {
             timer.text += "0" + ((int)(time) % 60).ToString();
