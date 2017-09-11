@@ -5,9 +5,11 @@ using UnityEngine;
 public class Food : MonoBehaviour
 {
 
+    //プレイヤーナンバー
+    public int PlayerID = 0;
+
     //消えるまでの時間
     public float deletetime = 60;
-
 
     // Use this for initialization
     void Start()

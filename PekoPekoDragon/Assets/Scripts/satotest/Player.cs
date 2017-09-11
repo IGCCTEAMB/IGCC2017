@@ -8,11 +8,12 @@ public class Player : MonoBehaviour
 
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
-    //GamepadInput.GamepadState keyState;
-    Vector2 axis;
 
-    //トリガー処理
-    //bool trigger = true;
+    //キャラクターコントローラー
+    private CharacterController controller;
+
+    //プレイヤーナンバー
+    public int PlayerID = 1;
 
     //速さ
     public float speed = 1.0f;
@@ -23,8 +24,10 @@ public class Player : MonoBehaviour
     //移動量
     float moveX = 0f;
     float moveZ = 0f;
+    Vector2 axis;
 
-    private CharacterController controller;
+    //なつき度
+    float loveRate = 0;
 
     void Start()
     {
@@ -32,7 +35,23 @@ public class Player : MonoBehaviour
         controller = GetComponent<CharacterController>();
 
         //コントローラ設定
-        playerNo = GamepadInput.GamePad.Index.One;
+        switch(PlayerID)
+        {
+            case 1:
+                playerNo = GamepadInput.GamePad.Index.One;
+                break;
+            case 2:
+                playerNo = GamepadInput.GamePad.Index.Two;
+                break;
+            case 3:
+                playerNo = GamepadInput.GamePad.Index.Three;
+                break;
+            case 4:
+                playerNo = GamepadInput.GamePad.Index.Four;
+                break;
+            default:
+                break;
+        }
     }
 
     void Update()

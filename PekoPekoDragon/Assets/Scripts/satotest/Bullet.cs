@@ -5,6 +5,9 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
+    //プレイヤーナンバー
+    public int PlayerID = 0;
+
     //消えるまでの時間
     public float deletetime = 60;
 

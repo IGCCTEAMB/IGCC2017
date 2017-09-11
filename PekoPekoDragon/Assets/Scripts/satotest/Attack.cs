@@ -12,6 +12,9 @@ public class Attack : MonoBehaviour
     //トリガー処理
     bool trigger = true;
 
+    //プレイヤーナンバー
+    int PlayerID = 1;
+
     // Bullet prefab
     public GameObject Bullet;
 
@@ -30,7 +33,25 @@ public class Attack : MonoBehaviour
     void Start()
     {
         //コントローラ設定
-        playerNo = GamepadInput.GamePad.Index.One;
+
+        PlayerID = this.gameObject.GetComponent<Player>().PlayerID;
+        switch (PlayerID)
+        {
+            case 1:
+                playerNo = GamepadInput.GamePad.Index.One;
+                break;
+            case 2:
+                playerNo = GamepadInput.GamePad.Index.Two;
+                break;
+            case 3:
+                playerNo = GamepadInput.GamePad.Index.Three;
+                break;
+            case 4:
+                playerNo = GamepadInput.GamePad.Index.Four;
+                break;
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -51,8 +72,12 @@ public class Attack : MonoBehaviour
             // 弾の複製
             GameObject attacks = GameObject.Instantiate(Bullet) as GameObject;
 
+            //色々あたり判定を無視する
             Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
             Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
+
+            //エサに自分のタグをつける
+            attacks.GetComponent<Bullet>().PlayerID = this.PlayerID;
 
             Vector3 force;
             force = this.gameObject.transform.forward * speed;
