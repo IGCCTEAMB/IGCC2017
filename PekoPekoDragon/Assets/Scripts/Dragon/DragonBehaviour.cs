@@ -19,11 +19,20 @@ public class DragonBehaviour : MonoBehaviour
 
     [SerializeField]
     private GameObject _targetObject;
+    [SerializeField]
+    private AudioClip[] _fireSounds;
 
     private NavMeshAgent navMeshAgent;
 
     private float time;
     public float attackDelay = 2;
+
+
+
+    // ご機嫌度
+    int moodValue;
+    // 最大ご機嫌度
+    public int MAX_MOOD_VALUE = 100;
 
     // Use this for initialization
     void Start()
@@ -75,6 +84,11 @@ public class DragonBehaviour : MonoBehaviour
                 navMeshAgent.isStopped = false;
 
                 navMeshAgent.SetDestination(_targetObject.transform.position);
+
+                // ドラゴンがプレイヤーについて行っている時の処理
+
+                // プレイヤーにシールドを張る
+                //GiveShield();
             }
 
         }
@@ -89,7 +103,24 @@ public class DragonBehaviour : MonoBehaviour
         {
             time = 0;
             GameObject par = Instantiate(dragonAttacks[attackNum], gameObject.transform.GetChild(attackNum + 1).transform.position, gameObject.transform.GetChild(attackNum + 1).transform.rotation);
-            
+            SoundManager.instance.PlaySFX(_fireSounds[attackNum]);
         }
+    }
+
+    void GiveShield()
+    {
+        // プレイヤーにシールドを張る
+
+        //// シールド   publicで指定
+        //GameObject prefab;
+        //// 生成するオブジェクト     publicで指定
+        //GameObject obj;
+
+        //obj = (GameObject)Instantiate(prefab);
+    }
+    public int MoodValue
+    {
+        get { return moodValue; }
+        set { moodValue = value; }
     }
 }

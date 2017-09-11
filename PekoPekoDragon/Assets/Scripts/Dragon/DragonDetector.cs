@@ -8,6 +8,8 @@ public class DragonDetector : MonoBehaviour
     private bool _badMood;
 
     public GameObject targetObject;
+    public int reduceValue;
+    int increaseValue;
 
     void OnTriggerEnter(Collider other)
     {
@@ -40,15 +42,41 @@ public class DragonDetector : MonoBehaviour
     {
         targetObject = null;
         _badMood = true;
-
+        increaseValue = (int)(GetComponentInParent<DragonBehaviour>().MAX_MOOD_VALUE * 0.02f);
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if(!_badMood)
+	}
+
+    public bool GetMood()
+    {
+        return _badMood;
+    }
+
+    public void CalcMoodValue()
+    {
+        if(_badMood)
         {
+            //時間経過で減らしていく
+            regulateMoodValue(-reduceValue);
+
+            // 餌を与えられたら怒りゲージを減らす
 
         }
-	}
+        else
+        {
+            // 餌を与えられたら増やす
+            regulateMoodValue(increaseValue);
+        }
+    }
+
+    private void regulateMoodValue(int regulateValue)
+    {
+        var db = GetComponent<DragonBehaviour>();
+        int moodValue = db.MoodValue;
+        moodValue += regulateValue;
+        db.MoodValue = moodValue;
+    }
 }
