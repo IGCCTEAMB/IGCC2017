@@ -55,7 +55,6 @@ public class GameManager : MonoBehaviour
 	
     void StartAction()
     {
-
     }
 
     IEnumerator PrepareCoroutine()
@@ -72,11 +71,14 @@ public class GameManager : MonoBehaviour
 
     void PlayingAction()
     {
-
     }
 
     void EndAction()
     {
+    }
 
+    public GameState GetGameState()
+    {
+        return currentGameState;
     }
 }
