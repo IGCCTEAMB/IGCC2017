@@ -42,7 +42,7 @@ public class DragonDetector : MonoBehaviour
     {
         targetObject = null;
         _badMood = true;
-        increaseValue = (int)(GetComponent<DragonBehaviour>().MAX_MOOD_VALUE * 0.02f);
+        increaseValue = (int)(GetComponentInParent<DragonBehaviour>().MAX_MOOD_VALUE * 0.02f);
     }
 	
 	// Update is called once per frame
