@@ -8,6 +8,8 @@ TagManager:
   - WeaponItem
   - Dragon
   - Feed
+  - Fire
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -336,7 +336,7 @@ MonoBehaviour:
   _minDistWithPlayer: 40
   dragonAttacks:
   - {fileID: 163286, guid: 50daa816369323b42b56093bb108296f, type: 2}
-  - {fileID: 1277525035247588, guid: 062893e7007e39441aea009115b6cefa, type: 2}
+  - {fileID: 1448258836578658, guid: 062893e7007e39441aea009115b6cefa, type: 2}
   _targetObject: {fileID: 0}
   attackDelay: 2
 --- !u!195 &239012101
@@ -558,7 +558,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 7ccfd7de17c75264c94d19f3b8d650b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1008,11 +1008,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4975531192000622, guid: 0d724b0e17a733645be41b104c9e6044, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -12.3
+      value: 9.8
       objectReference: {fileID: 0}
     - target: {fileID: 4975531192000622, guid: 0d724b0e17a733645be41b104c9e6044, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.5
+      value: -12.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d724b0e17a733645be41b104c9e6044, type: 2}
@@ -1097,7 +1097,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 941460822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 239012105}
@@ -1210,13 +1210,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1288807322}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 1.919, z: 1.466}
+  m_LocalRotation: {x: 0.14804266, y: -0, z: -0, w: 0.988981}
+  m_LocalPosition: {x: 0, y: 1.88, z: 1.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 239012105}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 17.027, y: 0, z: 0}
 --- !u!1001 &1401415374
 Prefab:
   m_ObjectHideFlags: 0
@@ -1827,7 +1827,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4975531192000622, guid: 0d724b0e17a733645be41b104c9e6044, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.35
+      value: 16.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d724b0e17a733645be41b104c9e6044, type: 2}
