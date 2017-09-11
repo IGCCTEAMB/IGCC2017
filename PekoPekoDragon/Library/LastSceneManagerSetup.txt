@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Title.unity
-=======
-- path: Assets/Scenes/Satou.unity
->>>>>>> e236ef30f8e2b5f37896595e0de985456b948060
+- path: Assets/Scenes/Play.unity
   isLoaded: 1
   isActive: 1
