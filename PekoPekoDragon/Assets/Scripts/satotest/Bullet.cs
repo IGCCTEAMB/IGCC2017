@@ -13,6 +13,9 @@ public class Bullet : MonoBehaviour
 
     public GameObject explodePrefab;
 
+    //パワーアップ
+    public bool powerUp = false;
+
     // Use this for initialization
     void Start()
     {
@@ -40,14 +43,20 @@ public class Bullet : MonoBehaviour
         {
             if (this.PlayerID != hit.gameObject.GetComponent<Player>().PlayerID)
             {
-                hit.gameObject.GetComponent<Player>().HP--;
+                if (powerUp)
+                {
+                    hit.gameObject.GetComponent<Player>().HP = 0;
+                }
+                else
+                {
+                    hit.gameObject.GetComponent<Player>().HP--;
+                }
+                //爆発を呼ぶ
+                GameObject go = Instantiate(explodePrefab, gameObject.transform.position, Quaternion.identity);
+                // このコンポーネントを持つGameObjectを破棄する
+                Destroy(this.gameObject);
             }
-
         }
-        //爆発を呼ぶ
-        GameObject go = Instantiate(explodePrefab);
-        // このコンポーネントを持つGameObjectを破棄する
-        Destroy(this.gameObject);
     }
 
 }
