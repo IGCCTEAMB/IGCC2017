@@ -26,9 +26,11 @@ public class DragonBehaviour : MonoBehaviour
 
     private float _time;
     private float _stopTime;
+    private float _moveDelayTime;
     public float atkMoveDelay = 1;
     public float attackDelay = 2;
     private bool _badMood;
+
 
 
 
@@ -37,6 +39,16 @@ public class DragonBehaviour : MonoBehaviour
     // 最大ご機嫌度
     public int MAX_MOOD_VALUE = 100;
 
+    public enum MoodState
+    {
+        BAD,
+        NORMAL,
+        GREAT,
+        HAPPY
+    }
+
+    private MoodState _moodState;
+
     // Use this for initialization
     void Start()
     {
@@ -44,19 +56,38 @@ public class DragonBehaviour : MonoBehaviour
         _badMood = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().GetMood();
         _time = 0;
         _stopTime = 0;
+        _moveDelayTime = 0;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        switch (moodValue)
+        {
+            case 0:
+                _moodState = MoodState.BAD;
+                //Attack();
+                break;
+            case 50:
+                _moodState = MoodState.NORMAL;
+                break;
+            case 80:
+                _moodState = MoodState.GREAT;
+                break;
+            case 100:
+                _moodState = MoodState.HAPPY;
+                GiveShield();
+                break;
+
+        }
 
         float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
         _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
 
         if (dist > minDist)
         {
-            Move();
+            Move();            
         }
         else
         {
@@ -65,14 +96,21 @@ public class DragonBehaviour : MonoBehaviour
     }
 
 
+
     void Move()
     {
 
         if (!_targetObject)
         {
-            navMeshAgent.SetDestination(waypoints[num].transform.position);
+            _moveDelayTime++;
+            if (_moveDelayTime > 5 * 60.0f)
+            {
+                _moveDelayTime = 0;
 
-            if (_badMood)
+                navMeshAgent.SetDestination(waypoints[num].transform.position);
+            }
+
+            if (_moodState == MoodState.BAD)
             {
                 Attack();
             }
@@ -84,28 +122,6 @@ public class DragonBehaviour : MonoBehaviour
 
                 // プレイヤーにシールドを張る
                 //GiveShield();
-            
-            //float dist = Vector3.Distance(gameObject.transform.position, _targetObject.transform.position);
-            //
-            //if (dist < _minDistWithPlayer)
-            //{
-            //
-            //    navMeshAgent.isStopped = true;
-            //    Attack();
-            //    gameObject.transform.LookAt(_targetObject.transform.position);
-            //
-            //}
-            //else
-            //{
-            //    navMeshAgent.isStopped = false;
-            //
-            //    navMeshAgent.SetDestination(_targetObject.transform.position);
-            //
-            //    // ドラゴンがプレイヤーについて行っている時の処理
-            //
-            //    // プレイヤーにシールドを張る
-            //    //GiveShield();
-            //}
 
         }
 
@@ -140,7 +156,7 @@ public class DragonBehaviour : MonoBehaviour
 
     }
 
-    void GiveShield()
+    public void GiveShield()
     {
         // プレイヤーにシールドを張る
 
@@ -156,4 +172,11 @@ public class DragonBehaviour : MonoBehaviour
         get { return moodValue; }
         set { moodValue = value; }
     }
+
+    public MoodState DragonMoodState
+    {
+        get { return _moodState; }
+        set { _moodState = value; }
+    }
+
 }

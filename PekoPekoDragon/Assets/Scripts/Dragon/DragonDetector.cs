@@ -11,6 +11,7 @@ public class DragonDetector : MonoBehaviour
     public int reduceValue;
     int increaseValue;
 
+
     void OnTriggerEnter(Collider other)
     {
         if(!_badMood)
@@ -42,6 +43,7 @@ public class DragonDetector : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+
 	}
 
     public bool GetMood()
