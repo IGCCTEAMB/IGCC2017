@@ -29,6 +29,9 @@ public class Attack : MonoBehaviour
 
     float CT = 0;
 
+    //パワーアップ
+    public bool powerUp = false;
+
     // Use this for initialization
     void Start()
     {
@@ -61,10 +64,10 @@ public class Attack : MonoBehaviour
         //キー情報取得
         keyState = GamepadInput.GamePad.GetState(playerNo, false);
 
-
         //キーが押された時
         //if (Input.GetKeyDown(KeyCode.Z))
-        if ((keyState.X || keyState.RightTrigger > 0.7f) && trigger == false && CT < 1)
+        if ((keyState.X || keyState.RightTrigger > 0.7f) && trigger == false && CT < 1
+            && this.gameObject.GetComponent<FoodThrow>().foodhave == false)
         {
             trigger = true;
             CT = cooltime;
@@ -76,7 +79,7 @@ public class Attack : MonoBehaviour
             Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
             Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
 
-            //エサに自分のタグをつける
+            //弾に自分のタグをつける
             attacks.GetComponent<Bullet>().PlayerID = this.PlayerID;
 
             Vector3 force;
@@ -87,6 +90,14 @@ public class Attack : MonoBehaviour
             attacks.transform.position = muzzle.position;
             // 向きを調整
             attacks.transform.rotation = muzzle.rotation;
+
+            //パワーアップ
+            if (powerUp)
+            {
+                attacks.GetComponent<Bullet>().powerUp = true;
+                powerUp = false;
+            }
+
         }
         else if (!keyState.X && keyState.RightTrigger < 0.7f && trigger == true)
         {

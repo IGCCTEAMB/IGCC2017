@@ -159,7 +159,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179668561892094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.23, z: 0}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4417481264379018}
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a58bb5ddc2755a4cb30ff0c34fad69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1918203098859464, guid: 9f94e3034f2a0084e9f417c9cb25ffab, type: 2}
+  Bullet: {fileID: 1162828520824756, guid: 5c2582e8f9d9a8b409ed44d46635fd8e, type: 2}
   muzzle: {fileID: 4876571862501730}
   speed: 300
   cooltime: 60
