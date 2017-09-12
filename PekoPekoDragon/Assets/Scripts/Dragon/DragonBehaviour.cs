@@ -24,8 +24,11 @@ public class DragonBehaviour : MonoBehaviour
 
     private NavMeshAgent navMeshAgent;
 
-    private float time;
+    private float _time;
+    private float _stopTime;
+    public float atkMoveDelay = 1;
     public float attackDelay = 2;
+    private bool _badMood;
 
 
 
@@ -38,7 +41,9 @@ public class DragonBehaviour : MonoBehaviour
     void Start()
     {
         navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        time = 0;
+        _badMood = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().GetMood();
+        _time = 0;
+        _stopTime = 0;
 
     }
 
@@ -62,34 +67,45 @@ public class DragonBehaviour : MonoBehaviour
 
     void Move()
     {
+
         if (!_targetObject)
         {
             navMeshAgent.SetDestination(waypoints[num].transform.position);
+
+            if (_badMood)
+            {
+                Attack();
+            }
         }
         else
         {
-
-            float dist = Vector3.Distance(gameObject.transform.position, _targetObject.transform.position);
-
-            if (dist < _minDistWithPlayer)
-            {
-
-                navMeshAgent.isStopped = true;
-                Attack();
-                gameObject.transform.LookAt(_targetObject.transform.position);
-
-            }
-            else
-            {
-                navMeshAgent.isStopped = false;
-
-                navMeshAgent.SetDestination(_targetObject.transform.position);
-
+            navMeshAgent.SetDestination(_targetObject.transform.position);
                 // ドラゴンがプレイヤーについて行っている時の処理
 
                 // プレイヤーにシールドを張る
                 //GiveShield();
-            }
+            
+            //float dist = Vector3.Distance(gameObject.transform.position, _targetObject.transform.position);
+            //
+            //if (dist < _minDistWithPlayer)
+            //{
+            //
+            //    navMeshAgent.isStopped = true;
+            //    Attack();
+            //    gameObject.transform.LookAt(_targetObject.transform.position);
+            //
+            //}
+            //else
+            //{
+            //    navMeshAgent.isStopped = false;
+            //
+            //    navMeshAgent.SetDestination(_targetObject.transform.position);
+            //
+            //    // ドラゴンがプレイヤーについて行っている時の処理
+            //
+            //    // プレイヤーにシールドを張る
+            //    //GiveShield();
+            //}
 
         }
 
@@ -97,14 +113,31 @@ public class DragonBehaviour : MonoBehaviour
 
     void Attack()
     {
-        time++;
         int attackNum = Random.Range(0, dragonAttacks.Length);
-        if (time > attackDelay * 60.0f)
+
+        if (!navMeshAgent.isStopped)
         {
-            time = 0;
-            GameObject par = Instantiate(dragonAttacks[attackNum], gameObject.transform.GetChild(attackNum + 1).transform.position, gameObject.transform.GetChild(attackNum + 1).transform.rotation);
-            SoundManager.instance.PlaySFX(_fireSounds[attackNum]);
+            _time++;
         }
+        else
+        {
+            _stopTime++;
+        }
+        
+        if (_time > attackDelay * 60.0f)
+        {
+            _time = 0;           
+            navMeshAgent.isStopped = true;
+            GameObject par = Instantiate(dragonAttacks[attackNum], gameObject.transform.GetChild(attackNum + 1).transform.position, gameObject.transform.GetChild(attackNum + 1).transform.rotation);
+            SoundManager.instance.PlaySFX(_fireSounds[attackNum]);      
+        }
+
+        if (_stopTime > 0.5 * 60.0f)
+        {
+            navMeshAgent.isStopped = false;
+            _stopTime = 0;
+        }
+
     }
 
     void GiveShield()
