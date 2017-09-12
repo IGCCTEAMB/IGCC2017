@@ -29,15 +29,14 @@ public class DragonBehaviour : MonoBehaviour
     private float _moveDelayTime;
     public float atkMoveDelay = 1;
     public float attackDelay = 2;
-    private bool _badMood;
 
 
 
 
     // ご機嫌度
-    int moodValue;
+    float moodValue;
     // 最大ご機嫌度
-    public int MAX_MOOD_VALUE = 100;
+    public float MAX_MOOD_VALUE = 100;
 
     public enum MoodState
     {
@@ -53,34 +52,42 @@ public class DragonBehaviour : MonoBehaviour
     void Start()
     {
         navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        _badMood = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().GetMood();
         _time = 0;
         _stopTime = 0;
         _moveDelayTime = 0;
-
+        _moodState = MoodState.NORMAL;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (moodValue)
+        int num;
+        
+        if(_moodState == MoodState.BAD)
         {
-            case 0:
-                _moodState = MoodState.BAD;
-                //Attack();
-                break;
-            case 50:
-                _moodState = MoodState.NORMAL;
-                break;
-            case 80:
-                _moodState = MoodState.GREAT;
-                break;
-            case 100:
-                _moodState = MoodState.HAPPY;
-                GiveShield();
-                break;
-
+            _moodState = MoodState.BAD;
+            // ご機嫌度を徐々に減らす
+            gameObject.transform.GetChild(0).GetComponent<DragonDetector>().CalcMoodValue();
+            num = 2;
         }
+        else if(moodValue < 30)
+        {
+            _moodState = MoodState.NORMAL;
+            num = 0;
+        }
+        else if(moodValue < 60)
+        {
+            _moodState = MoodState.GREAT;
+            num = 1;
+        }
+        else
+        {
+            _moodState = MoodState.HAPPY;
+            GiveShield();
+            num = 1;
+        }
+
+        GameManager.Instance.ChangeIcon(num);
 
         float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
         _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
@@ -167,7 +174,7 @@ public class DragonBehaviour : MonoBehaviour
 
         //obj = (GameObject)Instantiate(prefab);
     }
-    public int MoodValue
+    public float MoodValue
     {
         get { return moodValue; }
         set { moodValue = value; }

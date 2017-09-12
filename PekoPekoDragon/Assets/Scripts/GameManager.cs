@@ -23,12 +23,31 @@ public class GameManager : MonoBehaviour
     public GameObject[] players = new GameObject[4];
     public GameObject item;
     public GameObject dragon;
+    public GameObject dragonMoodValue;
+    public GameObject dragonIconUI;
+
+    public Sprite[] dragonIcons;
 
 	void Awake ()
     {
         Instance = this;
         SetCurrentState(GameState.Start);
 	}
+
+    void Update()
+    {
+        var db = dragon.GetComponent<DragonBehaviour>();
+
+        db.MoodValue += 0.1f;
+
+        float amount =db.MoodValue / db.MAX_MOOD_VALUE;
+        dragonMoodValue.GetComponent<Image>().fillAmount = amount;
+    }
+
+    public void ChangeIcon(int num)
+    {
+        dragonIconUI.GetComponent<Image>().sprite = dragonIcons[num];
+    }
 
     public void SetCurrentState(GameState state)
     {

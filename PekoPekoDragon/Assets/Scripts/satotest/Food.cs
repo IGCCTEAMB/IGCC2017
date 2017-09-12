@@ -33,6 +33,15 @@ public class Food : MonoBehaviour
         // 接触対象はDragonタグですか？
         if (hit.gameObject.tag == "Dragon")
         {
+            if(hit.gameObject.GetComponent<DragonBehaviour>().DragonMoodState == DragonBehaviour.MoodState.BAD)
+            {
+                hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(-20);
+            }
+            else
+            {
+                hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().CalcMoodValue();
+            }
+
             // 全てのプレイヤーを取得
             GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
             
