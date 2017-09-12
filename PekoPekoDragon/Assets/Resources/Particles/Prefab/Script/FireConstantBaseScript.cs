@@ -80,7 +80,7 @@ namespace DigitalRuby.PyroParticles
 
             // constant effect, so set the duration really high and add an infinite looping sound
             LoopingAudioSource = new LoopingAudioSource(this, AudioSource, StartTime, StopTime);
-            Duration = 999999999;
+            Duration = 2.0f;
         }
 
         protected override void Update()

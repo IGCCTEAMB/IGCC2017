@@ -247,11 +247,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioSource: {fileID: 82621742077225466}
   StartTime: 1
-  StopTime: 3
-  Duration: 1e+9
+  StopTime: 1
+  Duration: 1
   ForceAmount: 0
   ForceRadius: 0
-  IsProjectile: 0
+  IsProjectile: 1
   ManualParticleSystems: []
 --- !u!198 &198753540913598996
 ParticleSystem:

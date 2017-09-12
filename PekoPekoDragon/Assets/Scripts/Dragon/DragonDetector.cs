@@ -20,18 +20,12 @@ public class DragonDetector : MonoBehaviour
                 targetObject = other.gameObject;
             }
         }
-        else
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                targetObject = other.gameObject;
-            }
-        }
+
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Food")
+        if (other.gameObject.tag == "Food")
         {
          targetObject = null;
         }
