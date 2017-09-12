@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/Satou.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Masayuki.unity
-=======
-- path: Assets/Scenes/Play.unity
->>>>>>> 87688fb7a5aa8c768d23286661844b992b84609e
->>>>>>> 7a7c8e616cafafe1b359e3562c65d418dc493224
   isLoaded: 1
   isActive: 1

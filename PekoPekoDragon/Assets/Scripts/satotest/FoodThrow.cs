@@ -61,7 +61,7 @@ public class FoodThrow : MonoBehaviour {
 
         //キーが押された時
         //if (Input.GetKeyDown(KeyCode.Z))
-        if ((keyState.Y || keyState.LeftTrigger > 0.7f) && trigger == false && foodhave == true)
+        if ((keyState.A || keyState.LeftTrigger > 0.7f) && trigger == false && foodhave == true)
         {
             trigger = true;
             foodhave = false;
@@ -85,7 +85,7 @@ public class FoodThrow : MonoBehaviour {
             // 向きを調整
             foods.transform.rotation = muzzle.rotation;
         }
-        else if (!keyState.Y && keyState.LeftTrigger < 0.7f && trigger == true)
+        else if (!keyState.A && keyState.LeftTrigger < 0.7f && trigger == true)
         {
             trigger = false;
         }
