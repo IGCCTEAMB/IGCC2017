@@ -45,6 +45,26 @@ public class ItemScript : MonoBehaviour {
             // このコンポーネントを持つGameObjectを破棄する
             Destroy(this.gameObject);
         }
+        // 接触対象はDragonタグですか？
+        else if(hit.gameObject.tag == "Dragon")
+        {
+            // プレイヤーが投げた食べ物だったら
+            if(gameObject.tag == "Feed")
+            {
+                // 餌を投げたプレイヤーのなつき度を増加させる
+                // 全てのプレイヤーを取得
+                //GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+                // 餌を投げたプレイヤーを探す    ItemScriptに投げたPlayerを持たせる？
+
+                // なつき度を増やす
+                // obj.GetCompornent<Player>().Calc~();
+
+                // 餌を投げたプレイヤー以外を探す
+
+                // なつき度を減らす
+                // obj.GetCompornent<Player>().Calc~();
+            }
+        }
         else
         {
             Physics.IgnoreCollision(hit.gameObject.GetComponent<Collider>(), gameObject.GetComponent<Collider>());

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     public Text label;
 
+    public GameObject[] players = new GameObject[4];
+    public GameObject item;
+
 	void Awake ()
     {
         Instance = this;
