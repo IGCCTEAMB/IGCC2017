@@ -64,7 +64,7 @@ public class Attack : MonoBehaviour
 
         //キーが押された時
         //if (Input.GetKeyDown(KeyCode.Z))
-        if (keyState.X && trigger == false && CT < 1)
+        if ((keyState.X || keyState.RightTrigger > 0.7f) && trigger == false && CT < 1)
         {
             trigger = true;
             CT = cooltime;
@@ -88,7 +88,7 @@ public class Attack : MonoBehaviour
             // 向きを調整
             attacks.transform.rotation = muzzle.rotation;
         }
-        else if (!keyState.X && trigger == true)
+        else if (!keyState.X && keyState.RightTrigger < 0.7f && trigger == true)
         {
             trigger = false;
         }

@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     //消えるまでの時間
     public float deletetime = 60;
 
+    public GameObject explodePrefab;
 
     // Use this for initialization
     void Start()
@@ -30,4 +31,23 @@ public class Bullet : MonoBehaviour
         }
 
     }
+
+    //接触時に呼ばれるコールバック
+    void OnCollisionEnter(Collision hit)
+    {
+        //接触対象はPlayerタグですか？
+        if (hit.gameObject.tag == "Player")
+        {
+            if (this.PlayerID != hit.gameObject.GetComponent<Player>().PlayerID)
+            {
+                hit.gameObject.GetComponent<Player>().HP--;
+            }
+
+        }
+        //爆発を呼ぶ
+        GameObject go = Instantiate(explodePrefab);
+        // このコンポーネントを持つGameObjectを破棄する
+        Destroy(this.gameObject);
+    }
+
 }

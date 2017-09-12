@@ -676,7 +676,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96c2ad24d5054f94ebbbde447bcb7e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerID: 0
   deletetime: 60
+  explodePrefab: {fileID: 1437428452396432, guid: 50d151346ca82d44d8e4d5cbb5f62a5b,
+    type: 2}
 --- !u!114 &114952149191359980
 MonoBehaviour:
   m_ObjectHideFlags: 1

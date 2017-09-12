@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
 
+    //キー情報取得
+    GamepadInput.GamepadState keyState;
+
     //キャラクターコントローラー
     private CharacterController controller;
 
@@ -22,12 +25,18 @@ public class Player : MonoBehaviour
     public float rotatespeed = 25.0f;
 
     //移動量
-    float moveX = 0f;
-    float moveZ = 0f;
+    public float moveX = 0f;
+    public float moveZ = 0f;
     Vector2 axis;
+
+    //生命力
+    public int HP = 3;
 
     //なつき度
     float loveRate = 0;
+
+    //ジャンプ
+    
 
     void Start()
     {
@@ -58,23 +67,32 @@ public class Player : MonoBehaviour
     {
 
         //キー情報取得
-        //keyState = GamepadInput.GamePad.GetState(playerNo, false);
+        keyState = GamepadInput.GamePad.GetState(playerNo, false);
         axis = GamepadInput.GamePad.GetAxis(GamepadInput.GamePad.Axis.LeftStick, playerNo, false);
 
-        //moveX = Input.GetAxis("Horizontal") * speed;
-        //moveZ = Input.GetAxis("Vertical") * speed;
+        //移動
+
+        //計算
         moveX = axis.x * speed;
         moveZ = axis.y * speed;
-        Vector3 direction = new Vector3(moveX, 0, moveZ);
 
+        Vector3 direction = new Vector3(moveX, 0.0f, moveZ);
+
+        controller.Move(direction * Time.deltaTime);
+
+        //回転
         float step = rotatespeed + Time.deltaTime;
-
-        controller.SimpleMove(direction);
 
         if (axis.x * axis.x > 0.2f || axis.y * axis.y > 0.2f)
         {
-            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, Quaternion.LookRotation(direction), step);
+            gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, Quaternion.LookRotation(new Vector3(direction.x,0f, direction.z)), step);
         }
+
+        if (HP < 1)
+        {
+            HP = 3;
+        }
+
 
 
     }
@@ -84,3 +102,27 @@ public class Player : MonoBehaviour
 
 
 //        if (Input.GetKey(KeyCode.RightArrow))
+//moveX = Input.GetAxis("Horizontal") * speed;
+//moveZ = Input.GetAxis("Vertical") * speed;
+/*
+    public float moveY = 0f;
+    public bool jumpflag = false;
+    
+   if (jumpflag)
+   moveY -= 9.8f * Time.deltaTime; //重力
+   if (gameObject.transform.position.y < 0.68f) jumpflag = false;
+               moveY += 20;
+        //ジャンプ
+        if (!jumpflag)
+        {
+            moveY = 0f;
+            if (keyState.A)
+            {
+                jumpflag = true;
+                moveY = 5f;
+            }
+        }
+
+                    hit.gameObject.GetComponent<Player>().moveY += 5;
+                hit.gameObject.GetComponent<Player>().jumpflag = true;
+     */

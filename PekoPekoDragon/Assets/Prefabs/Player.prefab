@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a58bb5ddc2755a4cb30ff0c34fad69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1918203098859464, guid: 26d9cb0d2a604354fb2bb6394ca1cef3, type: 2}
+  Bullet: {fileID: 1918203098859464, guid: 9f94e3034f2a0084e9f417c9cb25ffab, type: 2}
   muzzle: {fileID: 4876571862501730}
   speed: 300
   cooltime: 60
@@ -330,6 +330,9 @@ MonoBehaviour:
   PlayerID: 1
   speed: 3
   rotatespeed: 25
+  moveX: 0
+  moveZ: 0
+  HP: 3
 --- !u!114 &114331454380787378
 MonoBehaviour:
   m_ObjectHideFlags: 1
