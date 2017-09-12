@@ -26,6 +26,30 @@ public class Food : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
 
+    void OnCollisionEnter(Collision hit)
+    {
+        // 接触対象はDragonタグですか？
+        if (hit.gameObject.tag == "Dragon")
+        {
+            // 全てのプレイヤーを取得
+            GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+            
+            for (int i = 0; i < objs.Length; i++)
+            {
+                // 餌を投げたプレイヤー
+                if(i == PlayerID)
+                {
+                    // なつき度を増やす
+                    //objs[i].GetComponent<Player>().Calc();
+                }
+                else
+                {
+                    // なつき度を減らす
+                    //objs[i].GetComponent<Player>().Calc();
+                }
+            }
+        }
     }
 }

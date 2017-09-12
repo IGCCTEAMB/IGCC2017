@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] players = new GameObject[4];
     public GameObject item;
+    public GameObject dragon;
 
 	void Awake ()
     {
