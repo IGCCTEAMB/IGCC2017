@@ -342,6 +342,7 @@ MonoBehaviour:
   _fireSounds:
   - {fileID: 8300000, guid: 9e8ce623bafed8e43bedc188b3fc046f, type: 3}
   - {fileID: 8300000, guid: 00567c9401ce5364fa0b2830749f785a, type: 3}
+  atkMoveDelay: 1
   attackDelay: 2
   MAX_MOOD_VALUE: 100
 --- !u!195 &239012101
