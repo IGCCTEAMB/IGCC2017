@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {
+    //アニメーター
+    Animator animator;
 
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
@@ -35,9 +37,12 @@ public class Attack : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //コントローラ設定
+    //アニメーター取得
+    animator = this.GetComponent<Player>().animator;
 
-        PlayerID = this.gameObject.GetComponent<Player>().PlayerID;
+    //コントローラ設定
+
+    PlayerID = this.gameObject.GetComponent<Player>().PlayerID;
         switch (PlayerID)
         {
             case 1:
@@ -69,6 +74,9 @@ public class Attack : MonoBehaviour
         if ((keyState.X || keyState.RightTrigger > 0.7f) && trigger == false && CT < 1
             && this.gameObject.GetComponent<FoodThrow>().foodhave == false)
         {
+
+            animator.SetTrigger("AttackTrigger");
+
             trigger = true;
             CT = cooltime;
 

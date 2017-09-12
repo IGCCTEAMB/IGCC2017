@@ -302,7 +302,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1162828520824756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -661,6 +661,7 @@ MonoBehaviour:
   deletetime: 60
   explodePrefab: {fileID: 1857188872261382, guid: 9f94e3034f2a0084e9f417c9cb25ffab,
     type: 2}
+  powerUp: 0
 --- !u!114 &114475094341428126
 MonoBehaviour:
   m_ObjectHideFlags: 1

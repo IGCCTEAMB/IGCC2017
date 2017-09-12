@@ -1,4 +1,24 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Play.unity
+=======
+<<<<<<< HEAD
+- path: Assets/Scenes/Satou.unity
+=======
+<<<<<<< HEAD
+- path: Assets/Scenes/Irfan.unity
+=======
+<<<<<<< HEAD
+- path: Assets/Scenes/Title.unity
+=======
+<<<<<<< HEAD
+- path: Assets/Scenes/Satou.unity
+=======
+- path: Assets/Scenes/Play.unity
+>>>>>>> c139c387db6ddffd9d6a0c5eb9abf2ac11dc96d4
+>>>>>>> 1051192368502a67606e5dd19e2ba75b2877f1b6
+>>>>>>> b2d4897b78ab053d11356a6622df1d1139dabcfa
+>>>>>>> e7ace7ba154f86e38c25ff66ebc84a7f4b3ba832
+>>>>>>> 854d186c983f2ef8715369193bdcbd0f373ba793
   isLoaded: 1
   isActive: 1

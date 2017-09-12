@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
 {
+    //アニメーター
+    public Animator animator;
 
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour
                 playerNo = GamepadInput.GamePad.Index.Four;
                 break;
             default:
+                playerNo = GamepadInput.GamePad.Index.Any;
                 break;
         }
     }
@@ -82,6 +85,15 @@ public class Player : MonoBehaviour
 
         //回転
         float step = rotatespeed + Time.deltaTime;
+
+        if (axis.x * axis.x > 0.0f || axis.y * axis.y > 0.0f)
+        {
+            animator.SetBool("Running", true);
+        }
+        else
+        {
+            animator.SetBool("Running", false);
+        }
 
         if (axis.x * axis.x > 0.2f || axis.y * axis.y > 0.2f)
         {
