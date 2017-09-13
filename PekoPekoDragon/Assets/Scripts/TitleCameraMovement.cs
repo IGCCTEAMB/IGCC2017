@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TitleCameraMovement : MonoBehaviour {
 
@@ -10,9 +11,12 @@ public class TitleCameraMovement : MonoBehaviour {
     private int num;
     [SerializeField]
     private float minDist;
-    [SerializeField]
-    private float speed;
 
+    private NavMeshAgent navMeshAgent;
+    void Start()
+    {
+        navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,9 +35,6 @@ public class TitleCameraMovement : MonoBehaviour {
     }
     void Move()
     {
-
-        gameObject.transform.LookAt(waypoints[num].transform.position);
-        gameObject.transform.position += gameObject.transform.forward * speed * Time.deltaTime;
-
+         navMeshAgent.SetDestination(waypoints[num].transform.position);
     }
 }
