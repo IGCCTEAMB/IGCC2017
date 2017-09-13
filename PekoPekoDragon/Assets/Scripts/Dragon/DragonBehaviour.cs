@@ -63,7 +63,22 @@ public class DragonBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int num;
+
+        float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
+        _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
+
+        Debug.Log(dist);
+
+        if (dist > minDist)
+        {
+            Move();
+        }
+        else
+        {
+            num = Random.Range(0, waypoints.Length);
+        }
+
+        int iconNum;
 
         moodValue += 0.1f;
 
@@ -72,23 +87,23 @@ public class DragonBehaviour : MonoBehaviour
             _moodState = MoodState.BAD;
             // ご機嫌度を徐々に減らす
             gameObject.transform.GetChild(0).GetComponent<DragonDetector>().CalcMoodValue();
-            num = 2;
+            iconNum = 2;
         }
         else if(moodValue < 50)
         {
             _moodState = MoodState.NORMAL;
-            num = 0;
+            iconNum = 0;
         }
         else if(moodValue < 80)
         {
             _moodState = MoodState.GREAT;
-            num = 0;
+            iconNum = 0;
         }
         else
         {
             _moodState = MoodState.HAPPY;
             GiveShield();
-            num = 1;
+            iconNum = 1;
 
             if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(clip.name))
             {
@@ -96,19 +111,9 @@ public class DragonBehaviour : MonoBehaviour
             }
         }
 
-        GameManager.Instance.ChangeIcon(num);
+        GameManager.Instance.ChangeIcon(iconNum);
 
-        float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
-        _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
 
-        if (dist > minDist)
-        {
-            Move();            
-        }
-        else
-        {
-            num = Random.Range(0, waypoints.Length);
-        }
     }
 
 
