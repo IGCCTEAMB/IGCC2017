@@ -48,7 +48,7 @@ public class DragonBehaviour : MonoBehaviour
 
     private MoodState _moodState;
 
-    public AnimationClip clip;
+    private Animator anim;
 
     // Use this for initialization
     void Start()
@@ -57,7 +57,9 @@ public class DragonBehaviour : MonoBehaviour
         _time = 0;
         _stopTime = 0;
         _moveDelayTime = 0;
+        num = 0;
         _moodState = MoodState.NORMAL;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -67,15 +69,28 @@ public class DragonBehaviour : MonoBehaviour
         float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
         _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
 
-        Debug.Log(dist);
-
         if (dist > minDist)
         {
+            
             Move();
         }
         else
         {
-            num = Random.Range(0, waypoints.Length);
+            Debug.Log(_moveDelayTime);
+            if (gameObject.transform.position.x == waypoints[num].transform.position.x &&
+                gameObject.transform.position.z == waypoints[num].transform.position.z)
+            {
+                _moveDelayTime++;
+
+                anim.SetBool("Idle Bool", true);
+                anim.SetBool("Walk Bool", false);
+            }
+
+            if (_moveDelayTime > 3 * 60.0f)
+            {
+                _moveDelayTime = 0;
+                num = Random.Range(0, waypoints.Length);
+            }
         }
 
         int iconNum;
@@ -104,11 +119,6 @@ public class DragonBehaviour : MonoBehaviour
             _moodState = MoodState.HAPPY;
             GiveShield();
             iconNum = 1;
-
-            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(clip.name))
-            {
-                GetComponent<ChangeAnimationClip>().ChangeClip(clip);
-            }
         }
 
         GameManager.Instance.ChangeIcon(iconNum);
@@ -120,32 +130,26 @@ public class DragonBehaviour : MonoBehaviour
 
     void Move()
     {
-
         if (!_targetObject)
         {
-            _moveDelayTime++;
-            if (_moveDelayTime > 5 * 60.0f)
+            if (!navMeshAgent.isStopped)
             {
-                _moveDelayTime = 0;
+                anim.SetBool("Walk Bool", true);
+                anim.SetBool("Idle Bool", false);
+
+                Debug.Log(waypoints[num].transform.position);
 
                 navMeshAgent.SetDestination(waypoints[num].transform.position);
             }
-
-            if (_moodState == MoodState.BAD)
-            {
-                Attack();
-            }
+                if (_moodState == MoodState.BAD)
+                {
+                    Attack();
+                }
         }
         else
         {
             navMeshAgent.SetDestination(_targetObject.transform.position);
-                // ドラゴンがプレイヤーについて行っている時の処理
-
-                // プレイヤーにシールドを張る
-                //GiveShield();
-
         }
-
     }
 
     void Attack()
@@ -158,23 +162,52 @@ public class DragonBehaviour : MonoBehaviour
         }
         else
         {
-            _stopTime++;
+            if(anim.GetCurrentAnimatorStateInfo(0).IsName("Attack basic(rage)") ||
+                anim.GetCurrentAnimatorStateInfo(0).IsName("Attack AOE(rage)"))
+            {
+                _stopTime++;
+            }
         }
-        
+
         if (_time > attackDelay * 60.0f)
         {
-            _time = 0;           
+            if (attackNum == 0)
+            {
+                // アニメーションを止める
+                anim.SetBool("Walk Bool", false);
+                anim.SetBool("Idle Bool", false);
+
+                // 炎を吐くアニメーション再生
+                anim.SetInteger("Attack Int", 1);
+            }
+            else
+            {
+                // アニメーションを止める
+                anim.SetBool("Walk Bool", false);
+                anim.SetBool("Idle Bool", false);
+
+                // 炎を吐くアニメーション再生
+                anim.SetInteger("Attack Int", 2);
+            }
+
+            _time = 0;
             navMeshAgent.isStopped = true;
             GameObject par = Instantiate(dragonAttacks[attackNum], gameObject.transform.GetChild(attackNum + 1).transform.position, gameObject.transform.GetChild(attackNum + 1).transform.rotation);
-            SoundManager.instance.PlaySFX(_fireSounds[attackNum]);      
+            SoundManager.instance.PlaySFX(_fireSounds[attackNum]);
         }
 
         if (_stopTime > 0.5 * 60.0f)
         {
-            navMeshAgent.isStopped = false;
-            _stopTime = 0;
-        }
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack basic(rage)") &&
+                !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack AOE(rage)"))
+            {
 
+                navMeshAgent.isStopped = false;
+                _stopTime = 0;
+
+                anim.SetInteger("Attack Int", 0);
+            }
+        }
     }
 
     public void GiveShield()
