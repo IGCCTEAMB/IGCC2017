@@ -34,7 +34,7 @@ public class DragonBehaviour : MonoBehaviour
 
 
     // ご機嫌度
-    float moodValue;
+    public float moodValue;
     // 最大ご機嫌度
     public float MAX_MOOD_VALUE = 100;
 
@@ -47,6 +47,8 @@ public class DragonBehaviour : MonoBehaviour
     }
 
     private MoodState _moodState;
+
+    public AnimationClip clip;
 
     // Use this for initialization
     void Start()
@@ -62,7 +64,9 @@ public class DragonBehaviour : MonoBehaviour
     void Update()
     {
         int num;
-        
+
+        moodValue += 0.1f;
+
         if(_moodState == MoodState.BAD)
         {
             _moodState = MoodState.BAD;
@@ -70,15 +74,20 @@ public class DragonBehaviour : MonoBehaviour
             gameObject.transform.GetChild(0).GetComponent<DragonDetector>().CalcMoodValue();
             num = 2;
         }
-        else if(moodValue < 30)
+        else if(moodValue < 50)
         {
             _moodState = MoodState.NORMAL;
             num = 0;
         }
-        else if(moodValue < 60)
+        else if(moodValue < 80)
         {
             _moodState = MoodState.GREAT;
-            num = 1;
+            num = 0;
+
+            if(!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(clip.name))
+            {
+                GetComponent<ChangeAnimationClip>().ChangeClip(clip);
+            }
         }
         else
         {
