@@ -20,6 +20,11 @@ public class Attack : MonoBehaviour
     // Bullet prefab
     public GameObject Bullet;
 
+    public GameObject PowerBullet;
+
+    GameObject attacks;
+
+
     // 発射点
     public Transform muzzle;
 
@@ -33,6 +38,10 @@ public class Attack : MonoBehaviour
 
     //パワーアップ
     public bool powerUp = false;
+
+    //ディレイ
+    int delay = 0;
+    bool delayTrigger = false;
 
     // Use this for initialization
     void Start()
@@ -80,8 +89,32 @@ public class Attack : MonoBehaviour
             trigger = true;
             CT = cooltime;
 
+            delayTrigger = true;
+
+        }
+        else if (!keyState.X && keyState.RightTrigger < 0.7f && trigger == true)
+        {
+            trigger = false;
+        }
+
+        if (delay > 24)
+        {
+            delay = 0;
+            delayTrigger = false;
+
             // 弾の複製
-            GameObject attacks = GameObject.Instantiate(Bullet) as GameObject;
+
+            //パワーアップ
+            if (powerUp)
+            {
+                attacks = GameObject.Instantiate(PowerBullet) as GameObject;
+                attacks.GetComponent<Bullet>().powerUp = true;
+                powerUp = false;
+            }
+            else
+            {
+                attacks = GameObject.Instantiate(Bullet) as GameObject;
+            }
 
             //色々あたり判定を無視する
             Physics.IgnoreCollision(attacks.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
@@ -99,17 +132,13 @@ public class Attack : MonoBehaviour
             // 向きを調整
             attacks.transform.rotation = muzzle.rotation;
 
-            //パワーアップ
-            if (powerUp)
-            {
-                attacks.GetComponent<Bullet>().powerUp = true;
-                powerUp = false;
-            }
 
         }
-        else if (!keyState.X && keyState.RightTrigger < 0.7f && trigger == true)
+
+        if (delayTrigger)
         {
-            trigger = false;
+            delay++;
         }
+
     }
 }
