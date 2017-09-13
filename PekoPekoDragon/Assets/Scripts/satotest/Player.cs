@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
     //ジャンプ
     
-
+    
     void Start()
     {
         // コンポーネントの取得
