@@ -198,6 +198,7 @@ public class DragonBehaviour : MonoBehaviour
 
         if (_stopTime > 0.5 * 60.0f)
         {
+            // 攻撃するアニメーションが再生されていなければ
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Attack basic(rage)") &&
                 !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack AOE(rage)"))
             {

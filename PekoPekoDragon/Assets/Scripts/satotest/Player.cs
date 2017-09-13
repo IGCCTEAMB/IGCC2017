@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
 
     //なつき度
     float loveRate = 0;
+    //最大なつき度
+    public float MAX_LOVE_RATE = 300;
 
     //ジャンプ
     
@@ -104,9 +106,18 @@ public class Player : MonoBehaviour
         {
             HP = 3;
         }
+    }
 
-
-
+    public float LoveRate
+    {
+        get
+        {
+            return loveRate;
+        }
+        set
+        {
+            loveRate = value;
+        }
     }
 }
 
