@@ -51,13 +51,15 @@ public class Food : MonoBehaviour
                 if(i == PlayerID)
                 {
                     // なつき度を増やす
-                    //objs[i].GetComponent<Player>().Calc();
+                    objs[i].GetComponent<Player>().LoveRate += 15;
                 }
                 else
                 {
                     // なつき度を減らす
-                    //objs[i].GetComponent<Player>().Calc();
+                    objs[i].GetComponent<Player>().LoveRate -= 2;
                 }
+
+                Mathf.Clamp(objs[i].GetComponent<Player>().LoveRate, 0, 100);
             }
         }
     }
