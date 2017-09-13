@@ -39,7 +39,9 @@ public class ItemScript : MonoBehaviour {
             }
             else if (gameObject.tag == "WeaponItem")
             {
-
+                //武器Get
+                if (!hit.gameObject.GetComponent<Attack>().powerUp)
+                    hit.gameObject.GetComponent<Attack>().powerUp = true;
             }
 
             // このコンポーネントを持つGameObjectを破棄する

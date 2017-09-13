@@ -50,11 +50,11 @@ public class Bullet : MonoBehaviour
                 else
                 {
                     hit.gameObject.GetComponent<Player>().HP--;
+                    //爆発を呼ぶ
+                    GameObject go = Instantiate(explodePrefab, gameObject.transform.position, Quaternion.identity);
+                    // このコンポーネントを持つGameObjectを破棄する
+                    Destroy(this.gameObject);
                 }
-                //爆発を呼ぶ
-                GameObject go = Instantiate(explodePrefab, gameObject.transform.position, Quaternion.identity);
-                // このコンポーネントを持つGameObjectを破棄する
-                Destroy(this.gameObject);
             }
         }
     }
