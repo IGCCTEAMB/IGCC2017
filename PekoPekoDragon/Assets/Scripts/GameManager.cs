@@ -23,12 +23,61 @@ public class GameManager : MonoBehaviour
     public GameObject[] players = new GameObject[4];
     public GameObject item;
     public GameObject dragon;
+    public GameObject dragonMoodValue;
+    public GameObject dragonIconUI;
+
+    public Sprite[] dragonIcons;
+
+    private DragonBehaviour db;
 
 	void Awake ()
     {
         Instance = this;
         SetCurrentState(GameState.Start);
 	}
+    void Start()
+    {
+        db = dragon.GetComponent<DragonBehaviour>();
+    }
+
+    void Update()
+    {
+        Debug.Log(db.DragonMoodState);
+        Debug.Log(db.MoodValue);
+
+        db.MoodValue -= 0.1f;
+
+        float amount = db.MoodValue / db.MAX_MOOD_VALUE;
+        dragonMoodValue.GetComponent<Image>().fillAmount = amount;
+
+
+        if (db.DragonMoodState == DragonBehaviour.MoodState.NORMAL)
+        {
+            if(db.MoodValue < 0 )
+            {
+                db.DragonMoodState = DragonBehaviour.MoodState.BAD;
+                db.MoodValue = db.MAX_MOOD_VALUE;
+                dragonMoodValue.GetComponent<Image>().color = Color.red;
+                dragonMoodValue.GetComponent<Image>().fillAmount = 1;
+            }
+        }else if(db.DragonMoodState == DragonBehaviour.MoodState.BAD)
+        {
+            if(db.MoodValue < 0)
+            {
+                db.DragonMoodState = DragonBehaviour.MoodState.NORMAL;
+                db.MoodValue = 30;
+                dragonMoodValue.GetComponent<Image>().color = Color.cyan;
+                dragonMoodValue.GetComponent<Image>().fillAmount = 1;
+            }
+        }
+
+    }
+
+    public void ChangeIcon(int num)
+    {
+        dragonIconUI.GetComponent<Image>().sprite = dragonIcons[num];
+    }
+
 
     public void SetCurrentState(GameState state)
     {

@@ -5,16 +5,16 @@ using UnityEngine;
 public class DragonDetector : MonoBehaviour
 {
 
-    private bool _badMood;
-
     public GameObject targetObject;
     public int reduceValue;
     int increaseValue;
 
+    DragonBehaviour db;
+
 
     void OnTriggerEnter(Collider other)
     {
-        if(!_badMood)
+        if(!(db.DragonMoodState == DragonBehaviour.MoodState.BAD))
         {
             if(other.gameObject.tag == "Food")
             {
@@ -36,8 +36,9 @@ public class DragonDetector : MonoBehaviour
 	void Start ()
     {
         targetObject = null;
-        _badMood = true;
         increaseValue = (int)(GetComponentInParent<DragonBehaviour>().MAX_MOOD_VALUE * 0.02f);
+
+        db = GetComponentInParent<DragonBehaviour>();
     }
 	
 	// Update is called once per frame
@@ -46,20 +47,12 @@ public class DragonDetector : MonoBehaviour
 
 	}
 
-    public bool GetMood()
-    {
-        return _badMood;
-    }
-
     public void CalcMoodValue()
     {
-        if(_badMood)
+        if (db.DragonMoodState == DragonBehaviour.MoodState.BAD)
         {
             //時間経過で減らしていく
             regulateMoodValue(-reduceValue);
-
-            // 餌を与えられたら怒りゲージを減らす
-
         }
         else
         {
@@ -68,11 +61,13 @@ public class DragonDetector : MonoBehaviour
         }
     }
 
-    private void regulateMoodValue(int regulateValue)
+    public void regulateMoodValue(int regulateValue)
     {
-        var db = GetComponent<DragonBehaviour>();
-        int moodValue = db.MoodValue;
+        var db = GetComponentInParent<DragonBehaviour>();
+        float moodValue = db.MoodValue;
         moodValue += regulateValue;
         db.MoodValue = moodValue;
     }
+
+
 }

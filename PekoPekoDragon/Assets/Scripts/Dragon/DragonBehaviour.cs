@@ -29,15 +29,14 @@ public class DragonBehaviour : MonoBehaviour
     private float _moveDelayTime;
     public float atkMoveDelay = 1;
     public float attackDelay = 2;
-    private bool _badMood;
 
 
 
 
     // ご機嫌度
-    int moodValue;
+    public float moodValue;
     // 最大ご機嫌度
-    public int MAX_MOOD_VALUE = 100;
+    public float MAX_MOOD_VALUE = 100;
 
     public enum MoodState
     {
@@ -49,50 +48,72 @@ public class DragonBehaviour : MonoBehaviour
 
     private MoodState _moodState;
 
+    public AnimationClip clip;
+
     // Use this for initialization
     void Start()
     {
         navMeshAgent = this.gameObject.GetComponent<NavMeshAgent>();
-        _badMood = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().GetMood();
         _time = 0;
         _stopTime = 0;
         _moveDelayTime = 0;
-
+        _moodState = MoodState.NORMAL;
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (moodValue)
-        {
-            case 0:
-                _moodState = MoodState.BAD;
-                //Attack();
-                break;
-            case 50:
-                _moodState = MoodState.NORMAL;
-                break;
-            case 80:
-                _moodState = MoodState.GREAT;
-                break;
-            case 100:
-                _moodState = MoodState.HAPPY;
-                GiveShield();
-                break;
-
-        }
 
         float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
         _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
 
+        Debug.Log(dist);
+
         if (dist > minDist)
         {
-            Move();            
+            Move();
         }
         else
         {
             num = Random.Range(0, waypoints.Length);
         }
+
+        int iconNum;
+
+        moodValue += 0.1f;
+
+        if(_moodState == MoodState.BAD)
+        {
+            _moodState = MoodState.BAD;
+            // ご機嫌度を徐々に減らす
+            gameObject.transform.GetChild(0).GetComponent<DragonDetector>().CalcMoodValue();
+            iconNum = 2;
+        }
+        else if(moodValue < 50)
+        {
+            _moodState = MoodState.NORMAL;
+            iconNum = 0;
+        }
+        else if(moodValue < 80)
+        {
+            _moodState = MoodState.GREAT;
+            iconNum = 0;
+        }
+        else
+        {
+            _moodState = MoodState.HAPPY;
+            GiveShield();
+            iconNum = 1;
+
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(clip.name))
+            {
+                GetComponent<ChangeAnimationClip>().ChangeClip(clip);
+            }
+        }
+
+        GameManager.Instance.ChangeIcon(iconNum);
+
+
     }
 
 
@@ -167,7 +188,7 @@ public class DragonBehaviour : MonoBehaviour
 
         //obj = (GameObject)Instantiate(prefab);
     }
-    public int MoodValue
+    public float MoodValue
     {
         get { return moodValue; }
         set { moodValue = value; }
