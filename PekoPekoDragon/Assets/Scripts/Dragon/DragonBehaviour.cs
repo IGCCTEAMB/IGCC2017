@@ -83,17 +83,17 @@ public class DragonBehaviour : MonoBehaviour
         {
             _moodState = MoodState.GREAT;
             num = 0;
-
-            if(!GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(clip.name))
-            {
-                GetComponent<ChangeAnimationClip>().ChangeClip(clip);
-            }
         }
         else
         {
             _moodState = MoodState.HAPPY;
             GiveShield();
             num = 1;
+
+            if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName(clip.name))
+            {
+                GetComponent<ChangeAnimationClip>().ChangeClip(clip);
+            }
         }
 
         GameManager.Instance.ChangeIcon(num);
