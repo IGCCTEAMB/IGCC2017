@@ -611,7 +611,7 @@ MonoBehaviour:
   AudioSource: {fileID: 0}
   StartTime: 0
   StopTime: 0.5
-  Duration: 0.8
+  Duration: 4
   ForceAmount: 0
   ForceRadius: 0
   IsProjectile: 0
@@ -639,9 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerID: 0
-  deletetime: 120
-  explodePrefab: {fileID: 1857188872261382, guid: 9f94e3034f2a0084e9f417c9cb25ffab,
-    type: 2}
+  deletetime: 300
   powerUp: 1
 --- !u!114 &114495606004649632
 MonoBehaviour:
@@ -673,7 +671,7 @@ MonoBehaviour:
   AudioSource: {fileID: 82258993394509502}
   StartTime: 0.25
   StopTime: 1
-  Duration: 1.6
+  Duration: 4.8
   ForceAmount: 0
   ForceRadius: 0
   IsProjectile: 1

@@ -1929,11 +1929,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a58bb5ddc2755a4cb30ff0c34fad69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1162828520824756, guid: 5c2582e8f9d9a8b409ed44d46635fd8e, type: 2}
+  Bullet: {fileID: 1851622660381408, guid: c6b22b3a0c999ca46a979889be875c56, type: 2}
   PowerBullet: {fileID: 1706599590697254, guid: da56641154560d24eb68bb5be2203cb0,
     type: 2}
   muzzle: {fileID: 4876571862501730}
-  speed: 300
+  speed: 500
   cooltime: 60
   powerUp: 0
 --- !u!114 &114244159481485404
