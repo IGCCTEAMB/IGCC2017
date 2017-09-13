@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject dragonIconUI;
 
     public Sprite[] dragonIcons;
+    public Sprite[] playerLoveRate;
 
     private DragonBehaviour db;
 
@@ -42,9 +43,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(db.DragonMoodState);
-        //Debug.Log(db.MoodValue);
-
         db.MoodValue -= 0.1f;
 
         float amount = db.MoodValue / db.MAX_MOOD_VALUE;
