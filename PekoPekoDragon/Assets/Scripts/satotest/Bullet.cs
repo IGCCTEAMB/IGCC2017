@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     //消えるまでの時間
     public float deletetime = 60;
 
-    public GameObject explodePrefab;
+    //public GameObject explodePrefab;
 
     //パワーアップ
     public bool powerUp = false;
@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
                 {
                     hit.gameObject.GetComponent<Player>().HP--;
                     //爆発を呼ぶ
-                    GameObject go = Instantiate(explodePrefab, gameObject.transform.position, Quaternion.identity);
+                    //GameObject go = Instantiate(explodePrefab, gameObject.transform.position, Quaternion.identity);
                     // このコンポーネントを持つGameObjectを破棄する
                     Destroy(this.gameObject);
                 }
