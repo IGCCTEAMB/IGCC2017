@@ -7,7 +7,6 @@ public class Attack : MonoBehaviour
     //アニメーター
     Animator animator;
 
-
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
     GamepadInput.GamepadState keyState;
@@ -132,8 +131,6 @@ public class Attack : MonoBehaviour
             attacks.transform.position = muzzle.position;
             // 向きを調整
             attacks.transform.rotation = muzzle.rotation;
-
-
         }
 
         if (powerUp)

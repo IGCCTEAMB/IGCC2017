@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class Player : MonoBehaviour
@@ -20,6 +21,11 @@ public class Player : MonoBehaviour
     //プレイヤーナンバー
     public int PlayerID = 1;
 
+    //色
+    public Color[] colorHP;
+
+    public GameObject playerUI;
+
     //速さ
     public float speed = 1.0f;
 
@@ -28,6 +34,7 @@ public class Player : MonoBehaviour
 
     //移動量
     public float moveX = 0f;
+    public float moveY = 0f;
     public float moveZ = 0f;
     Vector2 axis;
 
@@ -35,9 +42,9 @@ public class Player : MonoBehaviour
     public int HP = 3;
 
     //Respawn
-    public float respawnTime = 6;
+    public float respawnTime = 60;
 
-    private float respawnCount;
+    public float respawnCount;
 
     public GameObject respawnPoint;
 
@@ -89,8 +96,11 @@ public class Player : MonoBehaviour
         //計算
         moveX = axis.x * speed;
         moveZ = axis.y * speed;
+        if (!controller.isGrounded) moveY -= 9.8f * Time.deltaTime; //重力
 
-        Vector3 direction = new Vector3(moveX, 0.0f, moveZ);
+        if (controller.isGrounded) moveY = 0.0f;
+
+        Vector3 direction = new Vector3(moveX, moveY, moveZ);
 
         controller.Move(direction * Time.deltaTime);
 
@@ -112,9 +122,8 @@ public class Player : MonoBehaviour
         }
 
         //死亡処理
-        if (HP < 1)
+        if (HP < 1 && respawnCount <1)
         {
-            HP = 3;
             respawnCount = respawnTime;
             loveRate = Mathf.CeilToInt(loveRate / 2f);
             GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
@@ -129,6 +138,7 @@ public class Player : MonoBehaviour
         }
         if (respawnCount == 1)
         {
+            HP = 3;
             respawnCount = 0;
             gameObject.transform.position = respawnPoint.transform.position;
             GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
@@ -136,6 +146,10 @@ public class Player : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
+        Debug.Log(HP);
+        //UIの色を変える
+        playerUI.GetComponent<Image>().color = colorHP[HP];
+    
         GameManager.Instance.ModifyHeartImageNum(PlayerID);
     }
 

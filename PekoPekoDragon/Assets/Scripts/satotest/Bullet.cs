@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
         //接触対象はPlayerタグですか？
         if (hit.gameObject.tag == "Player")
         {
-            if (this.PlayerID != hit.gameObject.GetComponent<Player>().PlayerID)
+            if (this.PlayerID != hit.gameObject.GetComponent<Player>().PlayerID && hit.gameObject.GetComponent<Player>().respawnCount < 1)
             {
                 if (powerUp)
                 {
@@ -49,7 +49,8 @@ public class Bullet : MonoBehaviour
                 }
                 else
                 {
-                    hit.gameObject.GetComponent<Player>().HP--;
+                    hit.gameObject.GetComponent<Player>().HP -= 1;
+                    hit.gameObject.GetComponent<Player>().HP = Mathf.Max(0, hit.gameObject.GetComponent<Player>().HP);
                     //爆発を呼ぶ
                     //GameObject go = Instantiate(explodePrefab, gameObject.transform.position, Quaternion.identity);
                     // このコンポーネントを持つGameObjectを破棄する
@@ -59,8 +60,7 @@ public class Bullet : MonoBehaviour
         }
         else if (hit.gameObject.tag == "Dragon")
         {
-
-            if(hit.gameObject.GetComponent<DragonBehaviour>().DragonMoodState == DragonBehaviour.MoodState.BAD)
+            if (hit.gameObject.GetComponent<DragonBehaviour>().DragonMoodState == DragonBehaviour.MoodState.BAD)
             {
                 hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(2);
             }
@@ -68,14 +68,8 @@ public class Bullet : MonoBehaviour
             {
                 hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(-2);
             }
-            // このコンポーネントを持つGameObjectを破棄する
-            Destroy(this.gameObject);
         }
-        if (!powerUp)
-        {
-            // このコンポーネントを持つGameObjectを破棄する
-            Destroy(this.gameObject);
-        }
+        // このコンポーネントを持つGameObjectを破棄する
+        Destroy(this.gameObject);
     }
-
 }

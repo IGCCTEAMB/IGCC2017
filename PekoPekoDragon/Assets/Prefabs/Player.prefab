@@ -1965,7 +1965,7 @@ MonoBehaviour:
     type: 2}
   muzzle: {fileID: 4876571862501730}
   speed: 500
-  cooltime: 60
+  cooltime: 0
   powerUp: 0
 --- !u!114 &114244159481485404
 MonoBehaviour:
@@ -1980,15 +1980,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 95161403609401068}
   PlayerID: 1
+  colorHP:
+  - {r: 0.27205884, g: 0.27205884, b: 0.27205884, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0.51724136, b: 0, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  playerUI: {fileID: 0}
   speed: 3
   rotatespeed: 25
   moveX: 0
+  moveY: 0
   moveZ: -0
   HP: 3
-  respawnTime: 6
+  respawnTime: 60
+  respawnCount: 0
   respawnPoint: {fileID: 0}
   deathPrefab: {fileID: 1462580218326960, guid: 451c5dbffe8b65247b0cafbefbca86ce,
     type: 2}
+  loveRate: 0
+  MAX_LOVE_RATE: 300
 --- !u!114 &114331454380787378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2129,7 +2139,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.5
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 15
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
