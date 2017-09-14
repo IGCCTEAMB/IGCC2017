@@ -39,6 +39,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         db = dragon.GetComponent<DragonBehaviour>();
+
+        for (int i = 0; i < 12; i++)
+        {
+            // 最初はハートは全て非表示
+            playerLoveRate[i].enabled = false;
+        }
     }
 
     void Update()
@@ -98,7 +104,7 @@ public class GameManager : MonoBehaviour
 
             if (i % 3 == 0)
             {
-                if(loveRate > 30)
+                if(loveRate > GetComponent<Player>().MAX_LOVE_RATE * 2.5)
                 {
                     playerLoveRate[i].enabled = true;
                     continue;
@@ -112,7 +118,7 @@ public class GameManager : MonoBehaviour
             }
             if (i % 3 == 1)
             {
-                if(loveRate > 60)
+                if(loveRate > GetComponent<Player>().MAX_LOVE_RATE * 5.5)
                 {
                     playerLoveRate[i].enabled = true;
                     continue;
@@ -126,7 +132,7 @@ public class GameManager : MonoBehaviour
             }
             if (i % 3 == 2)
             {
-                if(loveRate > 90)
+                if(loveRate > GetComponent<Player>().MAX_LOVE_RATE * 8.5)
                 {
                     playerLoveRate[i].enabled = true;
                 }
