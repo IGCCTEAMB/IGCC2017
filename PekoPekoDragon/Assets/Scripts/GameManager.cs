@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
                 dragonMoodValue.GetComponent<Image>().fillAmount = 1;
 
                 // 怒った時のアニメーションを再生
+                db.GetComponent<Animator>().SetBool("Walk Bool", false);
+                db.GetComponent<Animator>().SetBool("Idle Bool", false);
                 db.GetComponent<Animator>().SetTrigger("Rage Mode Trigger");
             }
         }

@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
     float screenAspect;
     Camera camera;
 
+    public float movement = 1.0f;
+
     // Use this for initialization
     void Start ()
     {
@@ -76,20 +78,16 @@ public class CameraController : MonoBehaviour
     {
         Vector3 minPos = targets[0].position;
         // X座標の最小値を求める
-        minPos.x = Mathf.Min(minPos.x, target1.position.x);
-        minPos.x = Mathf.Min(minPos.x, target2.position.x);
+        minPos.x = Mathf.Min(minPos.x, target1.position.x, target2.position.x);
         // Z座標の最小値を求める
-        minPos.z = Mathf.Min(minPos.z, target1.position.z);
-        minPos.z = Mathf.Min(minPos.z, target2.position.z);
+        minPos.z = Mathf.Min(minPos.z, target1.position.z, target2.position.z);
         targets[0].position = minPos;
 
         Vector3 maxPos = targets[1].position;
         // X座標の最大値を求める
-        maxPos.x = Mathf.Max(maxPos.x, target1.position.x);
-        maxPos.x = Mathf.Max(maxPos.x, target2.position.x);
+        maxPos.x = Mathf.Max(maxPos.x, target1.position.x + movement, target2.position.x + movement);
         // Z座標の最大値を求める
-        maxPos.z = Mathf.Max(maxPos.z, target1.position.z);
-        maxPos.z = Mathf.Max(maxPos.z, target2.position.z);
+        maxPos.z = Mathf.Max(maxPos.z, target1.position.z + movement, target2.position.z + movement);
         targets[1].position = maxPos;
     }
 
