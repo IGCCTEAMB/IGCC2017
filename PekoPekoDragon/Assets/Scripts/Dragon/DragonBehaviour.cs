@@ -30,6 +30,8 @@ public class DragonBehaviour : MonoBehaviour
     public float atkMoveDelay = 1;
     public float attackDelay = 2;
 
+    private int lastNum;
+
 
 
 
@@ -71,12 +73,13 @@ public class DragonBehaviour : MonoBehaviour
 
         if (dist > minDist)
         {
-            
-            Move();
+            if (lastNum != num)
+            {
+                Move();
+            }
         }
         else
         {
-            Debug.Log(_moveDelayTime);
             if (gameObject.transform.position.x == waypoints[num].transform.position.x &&
                 gameObject.transform.position.z == waypoints[num].transform.position.z)
             {
@@ -90,6 +93,8 @@ public class DragonBehaviour : MonoBehaviour
             {
                 _moveDelayTime = 0;
                 num = Random.Range(0, waypoints.Length);
+
+
             }
         }
 
@@ -113,17 +118,19 @@ public class DragonBehaviour : MonoBehaviour
         {
             _moodState = MoodState.GREAT;
             iconNum = 0;
+
+            GameManager.Instance.FollowPlayer();
         }
         else
         {
             _moodState = MoodState.HAPPY;
             GiveShield();
             iconNum = 1;
+
+            GameManager.Instance.FollowPlayer();
         }
 
         GameManager.Instance.ChangeIcon(iconNum);
-
-
     }
 
 
@@ -140,6 +147,7 @@ public class DragonBehaviour : MonoBehaviour
                 Debug.Log(waypoints[num].transform.position);
 
                 navMeshAgent.SetDestination(waypoints[num].transform.position);
+                lastNum = num;
             }
                 if (_moodState == MoodState.BAD)
                 {

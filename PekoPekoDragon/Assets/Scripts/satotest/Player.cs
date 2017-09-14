@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     public GameObject deathPrefab;
 
     //なつき度
-    float loveRate = 0;
+    public float loveRate = 0;
     //最大なつき度
     public float MAX_LOVE_RATE = 300;
 
@@ -136,8 +136,7 @@ public class Player : MonoBehaviour
 
         }
 
-
-
+        GameManager.Instance.ModifyHeartImageNum(PlayerID);
     }
 
     public float LoveRate
