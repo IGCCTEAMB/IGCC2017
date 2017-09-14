@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
             if (i % 3 == 0)
             {
-                if(loveRate > players[num - 1].GetComponent<Player>().MAX_LOVE_RATE * 2.5)
+                if(loveRate > players[num - 1].GetComponent<Player>().MAX_LOVE_RATE * 0.25)
                 {
                     playerLoveRate[i].enabled = true;
                     continue;
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
             }
             if (i % 3 == 1)
             {
-                if(loveRate > players[num - 1].GetComponent<Player>().MAX_LOVE_RATE * 5.5)
+                if(loveRate > players[num - 1].GetComponent<Player>().MAX_LOVE_RATE * 0.55)
                 {
                     playerLoveRate[i].enabled = true;
                     continue;
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
             }
             if (i % 3 == 2)
             {
-                if(loveRate > GetComponent<Player>().MAX_LOVE_RATE * 8.5)
+                if(loveRate > players[num - 1].GetComponent<Player>().MAX_LOVE_RATE * 0.85)
                 {
                     playerLoveRate[i].enabled = true;
                 }
