@@ -71,12 +71,13 @@ public class DragonBehaviour : MonoBehaviour
         float dist = Vector3.Distance(gameObject.transform.position, waypoints[num].transform.position);
         _targetObject = gameObject.transform.GetChild(0).GetComponent<DragonDetector>().targetObject;
 
+        Debug.Log(dist);
+
         if (dist > minDist)
         {
-            if (lastNum != num)
-            {
-                Move();
-            }
+            
+            Move();
+            
         }
         else
         {
