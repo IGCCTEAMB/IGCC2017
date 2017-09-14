@@ -4,115 +4,48 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    const int PLAYER_NUM = 4;
-    public float CAMERA_DISTANCE = -6.0f;
+    public float baseDistance = 5f;       // 停止時のカメラ―プレイヤー間の距離[m]
+    public float baseCameraHeight = 2f;   // 停止時のカメラの高さ[m]
+    public float chaseDamper = 3f;        // カメラの追跡スピード（追跡時のカメラ―プレイヤー間の距離がきまる）
+    public GameObject dragon;
+    private Camera cam;
 
-    GameObject[] player;
-    // 最小と最大の座標の位置に空のオブジェクトを生成するための変数
-    GameObject emptyObject1;
-    GameObject emptyObject2;
-    // 最小値の座標、最大値の座標を格納する
-    Transform[] targets;
-    [SerializeField]
-    Vector3 offset = new Vector3(0, 0, 2);
-    float screenAspect;
-    Camera camera;
+    public float offset;
 
-    public float movement = 1.0f;
-
-    // Use this for initialization
-    void Start ()
+    void Start()
     {
-        // 4人分作る
-        player = new GameObject[PLAYER_NUM];
-        for (int i = 0; i < PLAYER_NUM; i++)
-        {
-            // プレイヤーを読み込む
-            string name = "Player" + (i + 1).ToString();
-            player[i] = GameObject.Find(name);
-        }
-        emptyObject1 = new GameObject("Min GameObject");
-        emptyObject2 = new GameObject("Max GameObject");
-        targets = new Transform[2];
-        targets[0] = emptyObject1.transform;
-        targets[1] = emptyObject2.transform;
-        screenAspect = (float)Screen.height / Screen.width;
-        camera = GetComponent<Camera>();
+        cam = GetComponent<Camera>();
     }
 
-    // Update is called once per frame
-    void Update ()
+    void FixedUpdate()
     {
-        UpdateCameraPosition();
-        UpdateOrthographicSize();
+        // カメラの位置を設定
+        var desiredPos = dragon.transform.position - dragon.transform.forward * baseDistance + Vector3.up * baseCameraHeight;
+        cam.transform.position = Vector3.Lerp(cam.transform.position, desiredPos, Time.deltaTime * chaseDamper);
+
+        cam.transform.position = dragon.transform.position - new Vector3(0, 0, baseDistance) + new Vector3(0, baseCameraHeight, 0);
+
+        CalcScreenOff();  
     }
 
-    void UpdateCameraPosition()
+    void CalcScreenOff()
     {
-        // 初期化
-        emptyObject1.transform.position = Vector3.zero;
-        emptyObject2.transform.position = Vector3.zero;
-        targets[0] = emptyObject1.transform;
-        targets[1] = emptyObject2.transform;
+        float width = Screen.width / 2.0f;
+        float height = Screen.height / 2.0f;
 
-        int i;
-        int j;
-        for (i = 0; i < PLAYER_NUM - 1; i++)
+        for (int i = 0; i < 4; i++)
         {
-            for (j = i + 1; j < PLAYER_NUM; j++)
+            Vector3 distance = dragon.transform.position - GameManager.Instance.players[i].transform.position;
+            if(Mathf.Abs(distance.x) > width + offset)
             {
-                // XとZの最小値、最大値を求める
-                CalcMinAndMax(player[i].transform, player[j].transform);
+                // プレイヤーを殺す
+
+            }
+            else if(Mathf.Abs(distance.z) > height + offset)
+            {
+                // プレイヤーを殺す
+
             }
         }
-
-        emptyObject1.transform.position = targets[0].transform.position;
-        emptyObject2.transform.position = targets[1].transform.position;
-
-        // 2点間の中心点からカメラの位置を更新
-        Vector3 center = Vector3.Lerp(targets[0].position, targets[1].position, 0.5f);
-        transform.position = center + new Vector3(0.0f, 10.0f, CAMERA_DISTANCE);
-    }
-    
-    void CalcMinAndMax(Transform target1, Transform target2)
-    {
-        Vector3 minPos = targets[0].position;
-        // X座標の最小値を求める
-        minPos.x = Mathf.Min(minPos.x, target1.position.x, target2.position.x);
-        // Z座標の最小値を求める
-        minPos.z = Mathf.Min(minPos.z, target1.position.z, target2.position.z);
-        targets[0].position = minPos;
-
-        Vector3 maxPos = targets[1].position;
-        // X座標の最大値を求める
-        maxPos.x = Mathf.Max(maxPos.x, target1.position.x + movement, target2.position.x + movement);
-        // Z座標の最大値を求める
-        maxPos.z = Mathf.Max(maxPos.z, target1.position.z + movement, target2.position.z + movement);
-        targets[1].position = maxPos;
-    }
-
-    void UpdateOrthographicSize()
-    {
-        // ２点間のベクトルを取得
-        Vector3 targetsVector = AbsPositionDiff(targets[0], targets[1]) + offset;
-
-        // アスペクト比が縦長ならzの半分、横長ならxとアスペクト比でカメラのサイズを更新
-        float targetsAspect = targetsVector.z / targetsVector.x;
-        float targetOrthographicSize = 0;
-        if (screenAspect < targetsAspect)
-        {
-            targetOrthographicSize = targetsVector.z * 0.5f;
-        }
-        else
-        {
-            targetOrthographicSize = targetsVector.x * (1 / camera.aspect) * 0.5f;
-        }
-        camera.orthographicSize = targetOrthographicSize;
-    }
-
-    Vector3 AbsPositionDiff(Transform target1, Transform target2)
-    {
-        Vector3 targetsDiff = target1.position - target2.position;
-        return new Vector3(Mathf.Abs(targetsDiff.x), Mathf.Abs(targetsDiff.y), Mathf.Abs(targetsDiff.z));
     }
 }
