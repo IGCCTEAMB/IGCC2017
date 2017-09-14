@@ -31,7 +31,7 @@ public class Food : MonoBehaviour
     void OnCollisionEnter(Collision hit)
     {
         // 接触対象はDragonタグですか？
-        if (hit.gameObject.tag == "Dragon")
+        if (hit.gameObject.tag == "Dragon" && PlayerID != 0)
         {
             if(hit.gameObject.GetComponent<DragonBehaviour>().DragonMoodState == DragonBehaviour.MoodState.BAD)
             {
@@ -61,6 +61,8 @@ public class Food : MonoBehaviour
 
                 Mathf.Clamp(players[i].GetComponent<Player>().LoveRate, 0, 100);
             }
+            // このコンポーネントを持つGameObjectを破棄する
+            Destroy(this.gameObject);
         }
     }
 }

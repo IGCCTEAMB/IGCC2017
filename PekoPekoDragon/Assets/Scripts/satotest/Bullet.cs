@@ -59,9 +59,20 @@ public class Bullet : MonoBehaviour
         }
         else if (hit.gameObject.tag == "Dragon")
         {
-            hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(2);
-        }
 
+            if(hit.gameObject.GetComponent<DragonBehaviour>().DragonMoodState == DragonBehaviour.MoodState.BAD)
+            {
+                hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(2);
+            }
+            else
+            {
+                hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(-2);
+            }
+            // このコンポーネントを持つGameObjectを破棄する
+            Destroy(this.gameObject);
+        }
+        // このコンポーネントを持つGameObjectを破棄する
+        Destroy(this.gameObject);
     }
 
 }
