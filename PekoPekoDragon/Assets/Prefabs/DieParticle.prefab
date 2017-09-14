@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4855368117891672}
   - component: {fileID: 198893018538778788}
   - component: {fileID: 199287082108407212}
+  - component: {fileID: 114409000216496866}
   m_Layer: 0
   m_Name: DieParticle
   m_TagString: Untagged
@@ -41,6 +42,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114409000216496866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1462580218326960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40762802cff6ce5498e0847b4bb8f28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 2
 --- !u!198 &198893018538778788
 ParticleSystem:
   m_ObjectHideFlags: 1
