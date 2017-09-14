@@ -38,6 +38,8 @@ public class Attack : MonoBehaviour
     //パワーアップ
     public bool powerUp = false;
 
+    public float delayCount = 10;
+
     //ディレイ
     int delay = 0;
     bool delayTrigger = false;
@@ -97,7 +99,7 @@ public class Attack : MonoBehaviour
             trigger = false;
         }
 
-        if (delay > 24)
+        if (delay > delayCount)
         {
             delay = 0;
             delayTrigger = false;

@@ -1821,7 +1821,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179668561892094}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.12, y: 0.65, z: 0}
+  m_LocalPosition: {x: 18.95, y: 0.65, z: 14.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4802114154366426}
@@ -1961,12 +1961,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1851622660381408, guid: c6b22b3a0c999ca46a979889be875c56, type: 2}
-  PowerBullet: {fileID: 1706599590697254, guid: da56641154560d24eb68bb5be2203cb0,
+  PowerBullet: {fileID: 1842618455464232, guid: ab5a8f5542aad584e88256cba0fe5d97,
     type: 2}
   muzzle: {fileID: 4876571862501730}
   speed: 500
   cooltime: 0
   powerUp: 0
+  delayCount: 10
 --- !u!114 &114244159481485404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1981,9 +1982,9 @@ MonoBehaviour:
   animator: {fileID: 95161403609401068}
   PlayerID: 1
   colorHP:
-  - {r: 0.27205884, g: 0.27205884, b: 0.27205884, a: 0}
-  - {r: 1, g: 0, b: 0, a: 0}
-  - {r: 1, g: 0.51724136, b: 0, a: 0}
+  - {r: 0.53676474, g: 0.53676474, b: 0.53676474, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0.99264705, g: 0.7188134, b: 0, a: 1}
   - {r: 1, g: 1, b: 1, a: 0}
   playerUI: {fileID: 0}
   speed: 3
