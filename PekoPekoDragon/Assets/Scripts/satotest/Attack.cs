@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     //アニメーター
     Animator animator;
 
+
     //コントローラ取得
     GamepadInput.GamePad.Index playerNo;
     GamepadInput.GamepadState keyState;
@@ -23,7 +24,6 @@ public class Attack : MonoBehaviour
     public GameObject PowerBullet;
 
     GameObject attacks;
-
 
     // 発射点
     public Transform muzzle;
@@ -67,6 +67,7 @@ public class Attack : MonoBehaviour
                 playerNo = GamepadInput.GamePad.Index.Four;
                 break;
             default:
+                playerNo = GamepadInput.GamePad.Index.Any;
                 break;
         }
     }
@@ -135,6 +136,15 @@ public class Attack : MonoBehaviour
 
         }
 
+        if (powerUp)
+        {
+            gameObject.transform.GetChild(3).gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.transform.GetChild(3).gameObject.SetActive(false);
+        }
+
         if (delayTrigger)
         {
             delay++;
@@ -142,3 +152,4 @@ public class Attack : MonoBehaviour
 
     }
 }
+

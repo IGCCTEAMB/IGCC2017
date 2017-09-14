@@ -55,6 +55,7 @@ public class FoodThrow : MonoBehaviour {
                 playerNo = GamepadInput.GamePad.Index.Four;
                 break;
             default:
+                playerNo = GamepadInput.GamePad.Index.Any;
                 break;
         }
     }

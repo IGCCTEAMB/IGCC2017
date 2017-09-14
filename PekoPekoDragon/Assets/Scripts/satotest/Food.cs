@@ -43,23 +43,23 @@ public class Food : MonoBehaviour
             }
 
             // 全てのプレイヤーを取得
-            GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+            GameObject[] players = GameManager.Instance.players;
             
-            for (int i = 0; i < objs.Length; i++)
+            for (int i = 0; i < 4; i++)
             {
                 // 餌を投げたプレイヤー
-                if(i == PlayerID)
+                if(i == PlayerID - 1)
                 {
                     // なつき度を増やす
-                    objs[i].GetComponent<Player>().LoveRate += 15;
+                    players[i].GetComponent<Player>().LoveRate += 15;
                 }
                 else
                 {
                     // なつき度を減らす
-                    objs[i].GetComponent<Player>().LoveRate -= 2;
+                    players[i].GetComponent<Player>().LoveRate -= 2;
                 }
 
-                Mathf.Clamp(objs[i].GetComponent<Player>().LoveRate, 0, 100);
+                Mathf.Clamp(players[i].GetComponent<Player>().LoveRate, 0, 100);
             }
         }
     }

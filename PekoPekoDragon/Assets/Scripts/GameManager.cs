@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public GameObject dragonIconUI;
 
     public Sprite[] dragonIcons;
-    public Sprite[] playerLoveRate;
+    public Image[] playerLoveRate;
 
     private DragonBehaviour db;
 
@@ -84,6 +84,60 @@ public class GameManager : MonoBehaviour
         dragonIconUI.GetComponent<Image>().sprite = dragonIcons[num];
     }
 
+    // なつき度のハートの数を調整する
+    public void ModifyHeartImageNum(int num)
+    {
+        for (int i = 0; i < 12; i++)
+        {
+            // numは1～4
+            if (i / 3 != num - 1)
+                continue;
+
+            // なつき度によって表示するハートの数を変える
+            float loveRate = players[num - 1].GetComponent<Player>().LoveRate;
+
+            if (i % 3 == 0)
+            {
+                if(loveRate > 30)
+                {
+                    playerLoveRate[i].enabled = true;
+                    continue;
+                }
+                else
+                {
+                    playerLoveRate[i].enabled = false;
+                    // 残り2つの条件式には絶対いかないのでfor分から抜ける
+                    break;
+                }
+            }
+            if (i % 3 == 1)
+            {
+                if(loveRate > 60)
+                {
+                    playerLoveRate[i].enabled = true;
+                    continue;
+                }
+                else
+                {
+                    playerLoveRate[i].enabled = false;
+                    // 残り1つの条件式には絶対いかないのでfor分から抜ける
+                    break;
+                }
+            }
+            if (i % 3 == 2)
+            {
+                if(loveRate > 90)
+                {
+                    playerLoveRate[i].enabled = true;
+                }
+                else
+                {
+                    playerLoveRate[i].enabled = false;
+                }
+                break;
+            }
+        }
+    }
 
     public void SetCurrentState(GameState state)
     {
