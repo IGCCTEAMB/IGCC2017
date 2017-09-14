@@ -116,6 +116,7 @@ public class Player : MonoBehaviour
         {
             HP = 3;
             respawnCount = respawnTime;
+            loveRate = Mathf.CeilToInt(loveRate / 2f);
             GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -133,10 +134,7 @@ public class Player : MonoBehaviour
             GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
             gameObject.GetComponent<CapsuleCollider>().enabled = true;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
-
         }
-
-
 
     }
 
