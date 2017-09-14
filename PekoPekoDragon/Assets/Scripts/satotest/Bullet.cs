@@ -71,8 +71,11 @@ public class Bullet : MonoBehaviour
             // このコンポーネントを持つGameObjectを破棄する
             Destroy(this.gameObject);
         }
-        // このコンポーネントを持つGameObjectを破棄する
-        Destroy(this.gameObject);
+        if (!powerUp)
+        {
+            // このコンポーネントを持つGameObjectを破棄する
+            Destroy(this.gameObject);
+        }
     }
 
 }

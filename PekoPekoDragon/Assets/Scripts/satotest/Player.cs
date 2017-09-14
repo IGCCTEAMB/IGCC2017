@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
-       GameManager.Instance.ModifyHeartImageNum(PlayerID);
+       //GameManager.Instance.ModifyHeartImageNum(PlayerID);
 
     }
 
