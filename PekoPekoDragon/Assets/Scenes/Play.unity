@@ -450,7 +450,7 @@ RectTransform:
   m_GameObject: {fileID: 78593343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 0.5, z: 1}
+  m_LocalScale: {x: 2.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 315337125}
   m_Father: {fileID: 16735063}
@@ -540,7 +540,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 399, y: 225.00002}
+  m_AnchoredPosition: {x: 360, y: 225.00002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108367346
@@ -641,7 +641,7 @@ MonoBehaviour:
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 7
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -715,7 +715,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 6c0ca9d1ea8c6f945b90ab00002ea33d, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 100006, guid: 6c0ca9d1ea8c6f945b90ab00002ea33d, type: 3}
       propertyPath: m_Layer
@@ -1368,6 +1368,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e41bba5571fdf0d4a8457fe9b6fea6d3, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &414171707 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1666013996814604, guid: e8a2def85db30c1408b736b848676b9c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1967749445}
 --- !u!1 &432859555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1596,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &507376046
 GameObject:
@@ -1681,8 +1686,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
-  orthographic size: 5
+  orthographic: 0
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1704,13 +1709,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 521411068}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 8.8, y: 14.46, z: -17.77}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 9.91, y: 19.9, z: -10.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &521411074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,9 +1727,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4963e53b6e6585f4ca58e70dbbfc1c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CAMERA_DISTANCE: -6
-  offset: {x: 0, y: 0, z: 2}
-  movement: 1
+  baseDistance: 12
+  baseCameraHeight: 15
+  chaseDamper: 3
+  dragon: {fileID: 1595386757}
+  offset: 0
 --- !u!1001 &540896131
 Prefab:
   m_ObjectHideFlags: 0
@@ -2049,7 +2056,7 @@ Transform:
   - {fileID: 444961072}
   - {fileID: 1740754832}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &727780855
 GameObject:
@@ -2157,7 +2164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 82, y: 210}
+  m_AnchoredPosition: {x: 0, y: 210}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &782188307
@@ -2193,10 +2200,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: daa5ee86ca46f4c418f8e1edc97d8d7a, type: 3}
-    m_FontSize: 54
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 68
     m_Alignment: 1
     m_AlignByGeometry: 0
@@ -2398,7 +2405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 230, y: 225}
+  m_AnchoredPosition: {x: 160, y: 225}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1022055897
@@ -9252,7 +9259,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 311, y: 225.00002}
+  m_AnchoredPosition: {x: 260, y: 225.00002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1177860995
@@ -10767,6 +10774,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8f18e1d8c46c51f429429815455062fc, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1758082193 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1392058202998538, guid: e9cd756d6a4578f4a8fbb1cbe18b9f02,
+    type: 2}
+  m_PrefabInternal: {fileID: 1344089816}
 --- !u!1 &1760410839
 GameObject:
   m_ObjectHideFlags: 0
@@ -14571,7 +14583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 487, y: 225.00002}
+  m_AnchoredPosition: {x: 460, y: 225.00002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1924930370
@@ -16497,6 +16509,11 @@ MonoBehaviour:
   itemPrefabs:
   - {fileID: 1858357709387666, guid: 3f6f905c1f556904ca326d771063c24a, type: 2}
   - {fileID: 1205530009206492, guid: 24c34a992bd36b145b017983276b69e2, type: 2}
+--- !u!1 &2028286625 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1657776516452832, guid: 4b896adbc809937479621c6f65a28e7a,
+    type: 2}
+  m_PrefabInternal: {fileID: 922472206}
 --- !u!1 &2029941673
 GameObject:
   m_ObjectHideFlags: 0
@@ -16609,7 +16626,7 @@ Transform:
   - {fileID: 1377485806}
   - {fileID: 141358586}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2091562344
 GameObject:
@@ -16641,9 +16658,9 @@ MonoBehaviour:
   label: {fileID: 134033195}
   players:
   - {fileID: 95111923}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2028286625}
+  - {fileID: 414171707}
+  - {fileID: 1758082193}
   item: {fileID: 0}
   dragon: {fileID: 1595386757}
   dragonMoodValue: {fileID: 315337124}

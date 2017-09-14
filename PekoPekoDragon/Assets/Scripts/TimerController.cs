@@ -27,9 +27,20 @@ public class TimerController : MonoBehaviour
 
         // 値がマイナスにならないようにする
         time -= Time.deltaTime;
-        time = time < 0 ? time = 0 : time;
+
+        if(time < 0)
+        {
+            time = 0;
+
+            DrawResult();
+        }
 
         DrawTimer();
+    }
+
+    void DrawResult()
+    {
+
     }
 
     void DrawTimer()
