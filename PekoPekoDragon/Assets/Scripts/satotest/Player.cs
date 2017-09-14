@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     public GameObject deathPrefab;
 
     //なつき度
-    float loveRate = 0;
+    public float loveRate = 0;
     //最大なつき度
     public float MAX_LOVE_RATE = 300;
 
@@ -116,6 +116,7 @@ public class Player : MonoBehaviour
         {
             HP = 3;
             respawnCount = respawnTime;
+            loveRate = Mathf.CeilToInt(loveRate / 2f);
             GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -133,11 +134,12 @@ public class Player : MonoBehaviour
             GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
             gameObject.GetComponent<CapsuleCollider>().enabled = true;
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
-
         }
 
-
-
+<<<<<<< HEAD
+=======
+        GameManager.Instance.ModifyHeartImageNum(PlayerID);
+>>>>>>> 4d7be1fa7ae8c58019fb1d7e795ba5afc251db60
     }
 
     public float LoveRate

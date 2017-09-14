@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
 
     private DragonBehaviour db;
 
+    private int frameCount;
+
 	void Awake ()
     {
         Instance = this;
@@ -45,6 +47,8 @@ public class GameManager : MonoBehaviour
             // 最初はハートは全て非表示
             playerLoveRate[i].enabled = false;
         }
+
+        frameCount = 0;
     }
 
     void Update()
@@ -142,6 +146,28 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             }
+        }
+    }
+
+    public void FollowPlayer()
+    {
+        frameCount++;
+        // 5秒経ったら
+        if(frameCount >= 300)
+        {
+            // 一番なつき度が高いプレイヤーについていく
+            int playerNum = 0;
+            float max = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                float loveRate = players[i].GetComponent<Player>().LoveRate;
+                if(max < loveRate)
+                {
+                    max = loveRate;
+                    playerNum = i;
+                }
+            }
+            dragon.transform.GetChild(0).GetComponent<DragonDetector>().targetObject = players[playerNum];
         }
     }
 
