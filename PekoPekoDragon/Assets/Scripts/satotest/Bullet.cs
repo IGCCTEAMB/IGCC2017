@@ -57,6 +57,11 @@ public class Bullet : MonoBehaviour
                 }
             }
         }
+        else if (hit.gameObject.tag == "Dragon")
+        {
+            hit.gameObject.transform.GetChild(0).GetComponent<DragonDetector>().regulateMoodValue(2);
+        }
+
     }
 
 }

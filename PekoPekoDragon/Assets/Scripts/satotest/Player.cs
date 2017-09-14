@@ -34,6 +34,15 @@ public class Player : MonoBehaviour
     //生命力
     public int HP = 3;
 
+    //Respawn
+    public float respawnTime = 6;
+
+    private float respawnCount;
+
+    public GameObject respawnPoint;
+
+    public GameObject deathPrefab;
+
     //なつき度
     float loveRate = 0;
     //最大なつき度
@@ -102,10 +111,33 @@ public class Player : MonoBehaviour
             gameObject.transform.rotation = Quaternion.RotateTowards(gameObject.transform.rotation, Quaternion.LookRotation(new Vector3(direction.x,0f, direction.z)), step);
         }
 
+        //死亡処理
         if (HP < 1)
         {
             HP = 3;
+            respawnCount = respawnTime;
+            GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
+        //リスポーン処理
+        if (respawnCount > 0)
+        {
+            respawnCount -= 1;
+            Debug.Log(respawnCount);
+        }
+        if (respawnCount == 1)
+        {
+            respawnCount = 0;
+            gameObject.transform.position = respawnPoint.transform.position;
+            GameObject go = Instantiate(deathPrefab, gameObject.transform.position, Quaternion.Euler(-90f, 0f, 0f));
+            gameObject.GetComponent<CapsuleCollider>().enabled = true;
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
+        }
+
+
+
     }
 
     public float LoveRate
