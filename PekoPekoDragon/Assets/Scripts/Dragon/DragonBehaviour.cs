@@ -60,6 +60,7 @@ public class DragonBehaviour : MonoBehaviour
         _stopTime = 0;
         _moveDelayTime = 0;
         num = 0;
+        moodValue = 30.0f;
         _moodState = MoodState.NORMAL;
         anim = GetComponent<Animator>();
     }
@@ -98,8 +99,6 @@ public class DragonBehaviour : MonoBehaviour
         }
 
         int iconNum;
-
-        moodValue += 0.1f;
 
         if(_moodState == MoodState.BAD)
         {
@@ -148,10 +147,10 @@ public class DragonBehaviour : MonoBehaviour
                 navMeshAgent.SetDestination(waypoints[num].transform.position);
                 lastNum = num;
             }
-                if (_moodState == MoodState.BAD)
-                {
-                    Attack();
-                }
+            if (_moodState == MoodState.BAD)
+            {
+                Attack();
+            }
         }
         else
         {
