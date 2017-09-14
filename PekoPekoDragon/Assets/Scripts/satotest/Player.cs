@@ -136,7 +136,12 @@ public class Player : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
         }
 
+<<<<<<< HEAD
         GameManager.Instance.ModifyHeartImageNum(PlayerID);
+=======
+       //GameManager.Instance.ModifyHeartImageNum(PlayerID);
+
+>>>>>>> a6403386fcb8cabaad12ca3b3fe9fb3a23cacb48
     }
 
     public float LoveRate

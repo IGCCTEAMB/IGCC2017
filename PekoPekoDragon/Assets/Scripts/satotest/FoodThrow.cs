@@ -78,9 +78,8 @@ public class FoodThrow : MonoBehaviour {
                 //いろいろあたり判定を無視する
                 Physics.IgnoreCollision(foods.GetComponent<Collider>(), gameObject.GetComponent<Collider>());
                 Physics.IgnoreCollision(foods.GetComponent<Collider>(), gameObject.GetComponent<CharacterController>());
-
-                //エサに自分のタグをつける
-                foods.GetComponent<Food>().PlayerID = this.PlayerID;
+                Physics.IgnoreCollision(foods.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<Collider>());
+                Physics.IgnoreCollision(foods.GetComponent<Collider>(), GameObject.FindWithTag("Player").GetComponent<CharacterController>());
                 foodTrigger = true;
             }
             animator.SetBool("Hold", true);
@@ -112,6 +111,9 @@ public class FoodThrow : MonoBehaviour {
                 Vector3 force;
                 force = this.gameObject.transform.forward * speed;
                 foods.GetComponent<Rigidbody>().AddForce(force);
+
+                //エサに自分のタグをつける
+                foods.GetComponent<Food>().PlayerID = this.PlayerID;
                 foodTrigger = false;
             }
         }
