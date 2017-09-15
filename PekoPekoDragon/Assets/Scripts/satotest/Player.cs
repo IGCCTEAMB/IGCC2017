@@ -164,6 +164,15 @@ public class Player : MonoBehaviour
             loveRate = value;
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        // ドラゴンと接触したら死ぬ
+        if(other.gameObject.tag == "Dragon")
+        {
+            HP = 0;
+        }
+    }
 }
 
 //
